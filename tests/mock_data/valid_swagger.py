@@ -1,11 +1,6 @@
-import pytest
-from app.api_parser.swagger_parser import SwaggerParser
-
 
 #mock test with mock data (isolation) test do not affected by the internet.
-@pytest.fixture
-def valid_swagger_data():
-    return {
+VALID_SWAGGER_DATA= { 
         "paths": {
             "/test": {
                 "get": {

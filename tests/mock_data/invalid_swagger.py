@@ -1,9 +1,5 @@
-import pytest
 
-@pytest.fixture
-def invalid_swagger_data():
-    return
-    {
+INVALID_SWAGGER_DATA = {
         "paths": {
             "/test": {
                 "aaa": {
@@ -20,4 +16,4 @@ def invalid_swagger_data():
                 }
             }
         }
-    } 
+} 

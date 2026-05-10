@@ -1,16 +1,7 @@
 import pytest
 from app.api_parser.swagger_parser import SwaggerParser
 
-@pytest.fixture
-def parser_with_mock(monkeypatch, invalid_swagger_data):
 
-    def fake_fetch(self):
-        return invalid_swagger_data
-
-    monkeypatch.setattr(
-        SwaggerParser,
-        "fetch_swagger",
-        fake_fetch
-    )
-
-    return SwaggerParser()
+def test_invalid_methods_are_skipped(parser_with_invalid_mock):
+  endpoints = parser_with_invalid_mock.parse_paths()
+  assert len(endpoints) == 0, (f"Expected 0 endpoints but got {len(endpoints)}")

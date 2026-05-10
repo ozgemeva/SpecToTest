@@ -6,8 +6,8 @@ import pytest
      ("/user", "POST", "Create user", "createUser", ["user"]) #testCase-2,
 ])
 
-def test_parse_paths_returns_endpoint(parser_with_mock,path,method,summary,operation_id,tags):
-    endpoints_fromParser = parser_with_mock.parse_paths() #list, parse_paths() in swagger_parser class  
+def test_parse_paths_returns_endpoint(parser_with_valid_mock,path,method,summary,operation_id,tags):
+    endpoints_fromParser = parser_with_valid_mock.parse_paths() #list, parse_paths() in swagger_parser class  
     print(endpoints_fromParser)
     
     #key_tuple=(ep["path"], ep["method"]), value : endpoints_fromParser.item()
