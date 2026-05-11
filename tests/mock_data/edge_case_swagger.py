@@ -17,5 +17,22 @@ EDGE_CASE_SWAGGER_PATHS_DATA= {
         "paths": {}
     }
 
-
+EDGE_CASE_SWAGGER_UPPERCASE_METHOD_DATA= { 
+        "paths": {
+            "/test": {
+                "gEt": {
+                    "summary": "Uppercase Method",
+                    "operationId": "getTest",
+                    "tags": ["test"]
+                }
+            },
+            "/user": {
+                "post": {
+                    "summary": "Create user",
+                    "operationId": "createUser",
+                    "tags": ["user"]
+                }
+            }
+        }
+}
     

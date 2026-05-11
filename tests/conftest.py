@@ -4,7 +4,11 @@ from tests.mock_data.valid_swagger import VALID_SWAGGER_DATA
 from tests.mock_data.invalid_swagger import INVALID_SWAGGER_DATA
 from tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_MISSING_DATA
 from tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_PATHS_DATA
+from tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_UPPERCASE_METHOD_DATA
 
+@pytest.fixture
+def edge_case_uppercase_method_data():
+    return EDGE_CASE_SWAGGER_UPPERCASE_METHOD_DATA
 @pytest.fixture
 def edge_case_missing_fields_data():
     return EDGE_CASE_SWAGGER_MISSING_DATA
@@ -50,3 +54,7 @@ def parser_with_empty_paths_mock(monkeypatch,edge_case_empty_paths_data):
 @pytest.fixture
 def parser_with_missing_fields_mock(monkeypatch,edge_case_missing_fields_data):
     return create_mock_parser(monkeypatch,edge_case_missing_fields_data)
+
+@pytest.fixture
+def parser_with_uppercase_method_mock (monkeypatch,edge_case_uppercase_method_data):
+    return create_mock_parser(monkeypatch,edge_case_uppercase_method_data)
