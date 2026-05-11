@@ -2,6 +2,11 @@ import pytest
 from app.api_parser.swagger_parser import SwaggerParser
 from tests.mock_data.valid_swagger import VALID_SWAGGER_DATA
 from tests.mock_data.invalid_swagger import INVALID_SWAGGER_DATA
+from tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_DATA
+
+@pytest.fixture
+def edge_case_swagger_data():
+    return EDGE_CASE_SWAGGER_DATA
 
 @pytest.fixture
 def invalid_swagger_data():
@@ -31,3 +36,7 @@ def parser_with_valid_mock(monkeypatch, valid_swagger_data):
 @pytest.fixture
 def parser_with_invalid_mock(monkeypatch, invalid_swagger_data):
     return create_mock_parser(monkeypatch, invalid_swagger_data)
+
+@pytest.fixture
+def parser_with_edge_case_mock(monkeypatch,edge_case_swagger_data):
+    return create_mock_parser(monkeypatch,edge_case_swagger_data)
