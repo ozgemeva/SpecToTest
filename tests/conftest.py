@@ -2,11 +2,16 @@ import pytest
 from app.api_parser.swagger_parser import SwaggerParser
 from tests.mock_data.valid_swagger import VALID_SWAGGER_DATA
 from tests.mock_data.invalid_swagger import INVALID_SWAGGER_DATA
-from tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_DATA
+from tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_MISSING_DATA
+from tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_PATHS_DATA
 
 @pytest.fixture
-def edge_case_swagger_data():
-    return EDGE_CASE_SWAGGER_DATA
+def edge_case_missing_fields_data():
+    return EDGE_CASE_SWAGGER_MISSING_DATA
+
+@pytest.fixture
+def edge_case_empty_paths_data():
+    return EDGE_CASE_SWAGGER_PATHS_DATA
 
 @pytest.fixture
 def invalid_swagger_data():
@@ -15,6 +20,7 @@ def invalid_swagger_data():
 @pytest.fixture
 def valid_swagger_data():
     return VALID_SWAGGER_DATA
+
 
 #prepared test environment with fixture function
 def create_mock_parser(monkeypatch, mock_data):
@@ -38,5 +44,9 @@ def parser_with_invalid_mock(monkeypatch, invalid_swagger_data):
     return create_mock_parser(monkeypatch, invalid_swagger_data)
 
 @pytest.fixture
-def parser_with_edge_case_mock(monkeypatch,edge_case_swagger_data):
-    return create_mock_parser(monkeypatch,edge_case_swagger_data)
+def parser_with_empty_paths_mock(monkeypatch,edge_case_empty_paths_data):
+    return create_mock_parser(monkeypatch,edge_case_empty_paths_data)
+
+@pytest.fixture
+def parser_with_missing_fields_mock(monkeypatch,edge_case_missing_fields_data):
+    return create_mock_parser(monkeypatch,edge_case_missing_fields_data)

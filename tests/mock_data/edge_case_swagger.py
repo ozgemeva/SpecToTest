@@ -1,4 +1,4 @@
-EDGE_CASE_SWAGGER_DATA= { 
+EDGE_CASE_SWAGGER_MISSING_DATA= { 
         "paths": {
             "/test": {
                 "get": {}
@@ -12,3 +12,10 @@ EDGE_CASE_SWAGGER_DATA= {
             }
         }
     }
+
+EDGE_CASE_SWAGGER_PATHS_DATA= { 
+        "paths": {}
+    }
+
+
+    

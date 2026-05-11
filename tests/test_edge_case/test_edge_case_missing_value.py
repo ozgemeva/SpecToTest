@@ -1,7 +1,7 @@
 import pytest
 import json
 
-def test_edge_case_empty_list_method(parser_with_edge_case_mock,):
+def test_edge_case_missing_value(parser_with_edge_case_mock,):
   endpoints = parser_with_edge_case_mock.parse_paths()
      
   #key_tuple=(ep["path"], ep["method"]), value : endpoints_fromParser.item()
