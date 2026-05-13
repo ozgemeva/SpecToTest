@@ -9,7 +9,7 @@ VALID_SWAGGER_DATA= {
                     "tags": ["test"]
                 }
             },
-            "/user": {
+        "/user": {
                 "post": {
                     "summary": "Create user",
                     "operationId": "createUser",

@@ -35,4 +35,23 @@ EDGE_CASE_SWAGGER_UPPERCASE_METHOD_DATA= {
             }
         }
 }
-    
+
+EDGE_CASE_SWAGGER_EXTRA_UNKNOWN_DATA = {
+  "paths": {
+            "/test": {
+                "GET": {
+                    "summary": "Unkown Field",
+                    "operationId": "get",
+                    "randomField": "abc",
+                    "tags" : ["test"]
+                }
+            },
+            "/user": {
+                "post": {
+                    "summary": "Create user",
+                    "operationId": "createUser",
+                    "tags": ["user"]
+                }
+            }
+        } 
+}
