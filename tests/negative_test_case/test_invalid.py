@@ -1,4 +1,5 @@
 import json
+import pytest
 
 def test_invalid_methods_are_skipped(parser_with_invalid_mock):
   endpoints = parser_with_invalid_mock.parse_paths()

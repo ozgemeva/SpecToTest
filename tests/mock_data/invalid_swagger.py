@@ -17,3 +17,15 @@ INVALID_SWAGGER_DATA = {
             }
         }
 } 
+
+EMPTY_INVALID_SWAGGER_DATA = {}
+
+ISDICT_INVALID_SWAGGER_DATA ={
+   "paths":""
+}
+
+ISDICT_INVALID_MEHTOD_SWAGGER_DATA ={
+  "paths": {
+            "/test":"invalid"
+            }
+}

@@ -18,20 +18,28 @@ class SwaggerParser:
         swagger_data = self.fetch_swagger()#to take json
         
         if "paths" not in swagger_data: #json paths key
-            raise ValueError("Invalid Swagger format")
+            raise ValueError("Invalid Swagger Format")
     
+        if not isinstance(swagger_data["paths"],dict):
+            raise ValueError("Paths must be a dictionary")
+
         paths = swagger_data["paths"]
         parsed_endpoints = []
         
        
-       #for key, value in dict.items():
+        #for key, value in dict.items():
         for path, methods in paths.items():
-            for method, details in methods.items():   
+         if not isinstance(methods,dict):
+            raise ValueError("Methods must be a dictionary")
+            continue
+        
+         for method, details in methods.items():   
                 if method.lower() not in self.VALID_METHODS:
                     continue
                 
                 if not isinstance(details, dict):
                     continue
+                
                 
                 parsed_endpoints.append({
                     "path": path,
