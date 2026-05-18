@@ -15,6 +15,11 @@ AI-powered Swagger/OpenAPI parser for automated test generation.
 - Pytest-based test architecture
 - Mocked Swagger testing support
 
+## Technologies 
+- Python 
+- Pytest 
+- pytest-cov ---
+
 ---
 
 ## Project Structure
@@ -76,6 +81,11 @@ Run all tests and show print outputs:
 
 ```bash
 python -m pytest -v -s
+```
+## Run Tests with Coverage
+
+```bash
+pytest -s --cov=app --cov-report=term-missing
 ```
 ---
 ## Test Categories
