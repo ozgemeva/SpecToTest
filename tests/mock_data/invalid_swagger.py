@@ -29,3 +29,12 @@ ISDICT_INVALID_MEHTOD_SWAGGER_DATA ={
             "/test":"invalid"
             }
 }
+
+
+ISDICT_INVALID_DETAILS_SWAGGER_DATA = {
+    "paths": {
+        "/test": {
+            "get": "invalid"
+        }
+    }
+}

@@ -38,6 +38,7 @@ class SwaggerParser:
                     continue
                 
                 if not isinstance(details, dict):
+                    raise ValueError("Details must be a dictionary")
                     continue
                 
                 

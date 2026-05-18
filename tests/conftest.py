@@ -5,6 +5,7 @@ from tests.mock_data.invalid_swagger import INVALID_SWAGGER_DATA
 from tests.mock_data.invalid_swagger import EMPTY_INVALID_SWAGGER_DATA
 from tests.mock_data.invalid_swagger import ISDICT_INVALID_SWAGGER_DATA
 from tests.mock_data.invalid_swagger import ISDICT_INVALID_MEHTOD_SWAGGER_DATA
+from tests.mock_data.invalid_swagger import ISDICT_INVALID_DETAILS_SWAGGER_DATA
 from tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_MISSING_DATA
 from tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_PATHS_DATA
 from tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_UPPERCASE_METHOD_DATA
@@ -47,6 +48,10 @@ def isdict_swagger_data():
 @pytest.fixture
 def isdict_method_swagger_data():
     return ISDICT_INVALID_MEHTOD_SWAGGER_DATA
+
+@pytest.fixture
+def isdict_details_swagger_data():
+    return ISDICT_INVALID_DETAILS_SWAGGER_DATA
 
 #prepared test environment with fixture function
 def create_mock_parser(monkeypatch, mock_data):
@@ -96,3 +101,7 @@ def parser_with_nodict_fields_mock(monkeypatch,isdict_swagger_data):
 @pytest.fixture
 def parser_with_nodict_method_fields_mock(monkeypatch,isdict_method_swagger_data):
     return create_mock_parser(monkeypatch,isdict_method_swagger_data)
+
+@pytest.fixture
+def parser_with_nodict_details_fields_mock(monkeypatch,isdict_details_swagger_data):
+    return create_mock_parser(monkeypatch,isdict_details_swagger_data)
