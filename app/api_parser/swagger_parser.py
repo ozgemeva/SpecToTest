@@ -31,7 +31,7 @@ class SwaggerParser:
         for path, methods in paths.items():
          if not isinstance(methods,dict):
             raise ValueError("Methods must be a dictionary")
-            continue
+            
         
          for method, details in methods.items():   
                 if method.lower() not in self.VALID_METHODS:
@@ -39,7 +39,7 @@ class SwaggerParser:
                 
                 if not isinstance(details, dict):
                     raise ValueError("Details must be a dictionary")
-                    continue
+                    
                 
                 
                 parsed_endpoints.append({
