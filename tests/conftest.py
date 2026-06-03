@@ -1,15 +1,15 @@
 import pytest
 from app.api_parser.swagger_parser import SwaggerParser
-from tests.mock_data.valid_swagger import VALID_SWAGGER_DATA
-from tests.mock_data.invalid_swagger import INVALID_SWAGGER_DATA
-from tests.mock_data.invalid_swagger import EMPTY_INVALID_SWAGGER_DATA
-from tests.mock_data.invalid_swagger import ISDICT_INVALID_SWAGGER_DATA
-from tests.mock_data.invalid_swagger import ISDICT_INVALID_MEHTOD_SWAGGER_DATA
-from tests.mock_data.invalid_swagger import ISDICT_INVALID_DETAILS_SWAGGER_DATA
-from tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_MISSING_DATA
-from tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_PATHS_DATA
-from tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_UPPERCASE_METHOD_DATA
-from tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_EXTRA_UNKNOWN_DATA
+from tests.unit_tests.mock_data.valid_swagger import VALID_SWAGGER_DATA
+from tests.unit_tests.mock_data.invalid_swagger import INVALID_SWAGGER_DATA
+from tests.unit_tests.mock_data.invalid_swagger import EMPTY_INVALID_SWAGGER_DATA
+from tests.unit_tests.mock_data.invalid_swagger import ISDICT_INVALID_SWAGGER_DATA
+from tests.unit_tests.mock_data.invalid_swagger import ISDICT_INVALID_MEHTOD_SWAGGER_DATA
+from tests.unit_tests.mock_data.invalid_swagger import ISDICT_INVALID_DETAILS_SWAGGER_DATA
+from tests.unit_tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_MISSING_DATA
+from tests.unit_tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_PATHS_DATA
+from tests.unit_tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_UPPERCASE_METHOD_DATA
+from tests.unit_tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_EXTRA_UNKNOWN_DATA
 
 
 

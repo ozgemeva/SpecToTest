@@ -7,16 +7,18 @@ class SwaggerParser:
     VALID_METHODS = {"get", "post", "put", "delete", "patch"}
 
     def __init__(self):
-        self.url=Config.SWAGGER_URL
-        self.source =Config.LOCAL_SWAGGER_FILE
+        self.url=Config.SWAGGER_URL #"https://petstore.swagger.io/v2/swagger.json"
+        self.source =Config.LOCAL_SWAGGER_FILE # "spec/petstore.json"
         
     def fetch_swagger(self):
-        if self.source.startswith("http"):
+        try:
          response = requests.get(self.url, timeout=10)
          response.raise_for_status() #200 OK,404 NOTFOUND,500 ServerError
          return response.json()
        
-        else:
+        except requests.RequestException:
+           print(f"Failed to fetch from URL: {requests}")
+           print("Falling back to local Swagger file...")
            return self.fetch_swagger_from_file(self.source)
     
     def fetch_swagger_from_file(self, file_source):
@@ -78,8 +80,7 @@ class SwaggerParser:
          for response_data in details.get("responses", {}).values():
             response_content_types.extend(
             response_data.get("content", {}).keys() )
-            return list(set(response_content_types))
-            
+            return list(set(response_content_types))       
 
     def get_request_content_types(self, details):
         request_content_types = list (details.get("requestBody", {})
