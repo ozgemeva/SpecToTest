@@ -25,17 +25,9 @@ class SwaggerParser:
         with open(file_source, "r") as file:
             return json.load(file)
     
-    def get_request_content_types(self, details):
-        
-        return self.request_content_types
     
     def parse_paths(self):
         swagger_data = self.fetch_swagger()#to take json
-        
-        if swagger_data.get("swagger"):
-            print("\nWorking type is Swagger 2.0")
-        elif swagger_data.get("openapi"):
-            print("\n Working type is OpenAPI 3")
         
         if "paths" not in swagger_data: #json paths key
             raise ValueError("Invalid Swagger Format")
@@ -59,32 +51,23 @@ class SwaggerParser:
                    
                 if not isinstance(details, dict):
                     raise ValueError("Details must be a dictionary")
-
-                self.get_response_content_types(details)
-                self.get_request_content_types(details)
                 
                 parsed_endpoints.append({ "path": path, "method": method.upper(), 
                                          "summary": details.get("summary", "No summary"), 
                                          "operation_id": details.get("operationId"), 
                                          "tags": details.get("tags", []),
-                                         "requestBody": self.get_request_content_types(details),
-                                         "responses": self.get_response_content_types(details)})
+                                         "consumes": self.get_request_content_types(details),
+                                         "produces": self.get_response_content_types(details)})
                 
                # print("details:===>" , json.dumps(details, indent=4))
        
         return parsed_endpoints
 
     def get_response_content_types(self, details):
-         response_content_types = []
-
-         for response_data in details.get("responses", {}).values():
-            response_content_types.extend(
-            response_data.get("content", {}).keys() )
-            return list(set(response_content_types))       
+       # Returns the response content types from "produces" for Swagger 2.0
+        return details.get("produces", []) #'produces': ['application/json'],
 
     def get_request_content_types(self, details):
-        request_content_types = list (details.get("requestBody", {})
-                                      .get("content", {}) 
-                                      .keys())
-        return request_content_types
+         # Returns the request content types from "consumes" for Swagger 2.0
+         return details.get("consumes", []) #'consumes': ['multipart/form-data']
     
