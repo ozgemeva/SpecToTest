@@ -10,8 +10,12 @@ from tests.unit_tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_MISSI
 from tests.unit_tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_PATHS_DATA
 from tests.unit_tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_UPPERCASE_METHOD_DATA
 from tests.unit_tests.mock_data.edge_case_swagger import EDGE_CASE_SWAGGER_EXTRA_UNKNOWN_DATA
+from tests.unit_tests.mock_data.extract_schema import DETAILS
 
 
+@pytest.fixture
+def swagger_body_parameter_details():
+    return DETAILS
 
 @pytest.fixture
 def edge_case_extra_unknown_field_data():

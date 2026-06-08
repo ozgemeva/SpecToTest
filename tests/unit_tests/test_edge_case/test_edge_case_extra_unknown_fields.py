@@ -12,5 +12,5 @@ def test_edge_extra_unknown_fields(parser_with_extra_unknown_field_mock):
     assert ep is not None, "Endpoint not found"
     assert ep["method"] == "GET"
     assert "randomField" not in ep,("randomField this tag unexpected")
-    print("<--endpoints-->\n",json.dumps(endpoints, indent=4))
+    #print("<--endpoints-->\n",json.dumps(endpoints, indent=4))
    

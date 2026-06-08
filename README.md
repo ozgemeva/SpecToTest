@@ -1,25 +1,36 @@
 # SpecToTest
-
 AI-powered Swagger/OpenAPI parser for automated test generation.
 
-## Features
+Current scope: **Swagger 2.0**  
+OpenAPI 3 support may be added in later phases.
 
-- Parse Swagger/OpenAPI endpoints
-- Extract:
+## Project Goal
+SpecToTest is a QA automation tool designed to read Swagger/OpenAPI specifications and prepare structured endpoint data for future automated test generation.
+The long-term goal is to generate API test scenarios and later convert them into executable Playwright/API tests.
+---
+
+## Features
+- Parse Swagger 2.0 JSON specifications
+- Extract endpoint metadata:
   - path
   - HTTP method
   - summary
-  - operationId
+  - operation_id
   - tags
-- Built-in validation for supported HTTP methods
+  - consumes
+  - produces
+- Validate supported HTTP methods
+- Skip invalid or malformed endpoint definitions safely
+- Support mocked Swagger data for unit testing
 - Pytest-based test architecture
-- Mocked Swagger testing support
+- Test coverage reporting with pytest-cov
 
 ## Technologies 
-- Python 
-- Pytest 
-- pytest-cov ---
-
+- Python
+- Pytest
+- pytest-mock
+- pytest-cov
+- Requests
 ---
 
 ## Project Structure
@@ -32,13 +43,12 @@ SpecToTest/
 │   └── config.py
 │
 ├── tests/
+|   ├── unit_tests/  
 │   ├── conftest.py
-│   ├── mock_data/
-│   ├── happy_test_case/
-│   ├── negative_test_case/
-│   └── edge_case/
+│
+├── requirements.txt
+└── README.md
 ```
-
 ---
 
 ## Installation
@@ -60,7 +70,6 @@ Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-
 ---
 
 ## Running Tests
@@ -76,7 +85,6 @@ Run all tests with verbose output:
 ```bash
 python -m pytest -v
 ```
-
 Run all tests and show print outputs:
 
 ```bash
@@ -86,6 +94,7 @@ python -m pytest -v -s
 
 ```bash
 pytest -s --cov=app --cov-report=term-missing
+pytest -v --cov=app 
 ```
 ---
 ## Test Categories
@@ -102,13 +111,28 @@ Tests unusual or boundary scenarios such as:
 - missing tags
 - empty paths
 - malformed endpoint details
-
 ---
 
 ## Current Status
-Phase 1 completed:
+Phase 1 Completed
 - Swagger JSON parsing
-- Path extraction
+- Endpoint path extraction
 - HTTP method validation
-- Basic parser testing
-- Mock testing with pytest
+- Metadata extraction
+- Local file and URL-based Swagger loading
+- Mocked parser testing with Pytest
+- Edge case and negative scenario testing
+- Test coverage added
+Phase 2 In Progress
+- Request schema extraction
+- Response schema extraction
+- Swagger 2.0 body parameter handling
+- Preparing parsed endpoint data for future test generation
+
+## Roadmap
+Phase 1: Swagger parser engine
+Phase 2: Request/response schema extraction
+Phase 3: Test scenario generation
+Phase 4: AI-assisted test case creation
+Phase 5: Playwright/API test generation
+Phase 6: Test execution and reporting

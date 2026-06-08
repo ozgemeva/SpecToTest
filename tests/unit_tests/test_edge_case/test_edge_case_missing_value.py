@@ -11,7 +11,7 @@ def test_edge_case_missing_value(parser_with_missing_fields_mock,):
                     }
   
   ep = endpoint_map.get(("/test", "GET"))
-  print("<--endpoints-->\n",json.dumps(endpoints, indent=4))
+  #print("<--endpoints-->\n",json.dumps(endpoints, indent=4))
   assert ep is not None
   assert ep["summary"] == "No summary"
   assert ep["operation_id"] is None
