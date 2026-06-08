@@ -5,6 +5,7 @@ Current scope: **Swagger 2.0**
 OpenAPI 3 support may be added in later phases.
 
 ## Project Goal
+
 SpecToTest is a QA automation tool designed to read Swagger/OpenAPI specifications and prepare structured endpoint data for future automated test generation.
 The long-term goal is to generate API test scenarios and later convert them into executable Playwright/API tests.
 ---
