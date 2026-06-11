@@ -85,3 +85,5 @@ class SwaggerParser:
             if parameter.get("in") == "body":
                 return parameter.get("schema")
         return None
+
+    def extract_response_schema(self,details):

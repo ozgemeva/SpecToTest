@@ -5,7 +5,7 @@ def main():
     parser = SwaggerParser()
     endpoints = parser.parse_paths()
    
-    #print(json.dumps(endpoints, indent=4))
+    print(json.dumps(endpoints, indent=4))
     """    for endpoint in endpoints[:2]:
         print(f"Path: {endpoint['path']}")
         print(f"Method: {endpoint['method']}")
@@ -14,6 +14,7 @@ def main():
         print(f"Tags: {endpoint['tags']}")
         print(f"Consumes: {endpoint['consumes']}")
         print(f"Produces: {endpoint['produces']}")
+        print(f"request_schema: {endpoint['request_schema']}")
         print("-" * 40)  """
   
     

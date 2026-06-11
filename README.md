@@ -132,9 +132,9 @@ Phase 2 In Progress
 - Preparing parsed endpoint data for future test generation
 
 ## Roadmap
-Phase 1: Swagger parser engine
-Phase 2: Request/response schema extraction
-Phase 3: Test scenario generation
-Phase 4: AI-assisted test case creation
-Phase 5: Playwright/API test generation
-Phase 6: Test execution and reporting
+- Phase 1: Swagger parser engine
+- Phase 2: Request/response schema extraction
+- Phase 3: Test scenario generation
+- Phase 4: AI-assisted test case creation
+- Phase 5: Playwright/API test generation
+- Phase 6: Test execution and reporting
