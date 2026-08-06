@@ -91,17 +91,11 @@ class SwaggerParser:
     def extract_response_schema(self, details):
         responses = details.get("responses", {})
 
-        for status_code, response_data in responses.items():
-            #print("status_code:===>", status_code)
-            #print("response_data:===>", response_data)
+        if not isinstance(responses, dict):
+            return None
 
-            if not isinstance(response_data, dict):
-                continue
-            
-            if status_code == "200":
-                schema = response_data.get("schema")
-                print("status_code:===>", status_code)
-                if schema is not None:
-                    return schema
+        response_data = responses.get("200")
+        if not isinstance(response_data, dict):
+            return None
 
-        return None
+        return response_data.get("schema")
