@@ -1,11 +1,12 @@
 # SpecToTest
 AI-powered Swagger/OpenAPI parser for automated test generation.
-
 Current scope: **Swagger 2.0**  
 OpenAPI 3 support may be added in later phases.
 
-## Project Goal
+## Why SpecToTest?
+SpecToTest is a portfolio project focused on building a maintainable and extensible API testing framework from scratch. Each development phase adds a new capability while keeping the project fully tested and production-quality.
 
+## Project Goal
 SpecToTest is a QA automation tool designed to read Swagger/OpenAPI specifications and prepare structured endpoint data for future automated test generation.
 The long-term goal is to generate API test scenarios and later convert them into executable Playwright/API tests.
 
@@ -26,13 +27,26 @@ The long-term goal is to generate API test scenarios and later convert them into
 - Support mocked Swagger data for unit testing
 - Pytest-based test architecture
 - Test coverage reporting with pytest-cov
-
-## Technologies 
-- Python
+- Extract request content types
+- Extract response content types
+- Extract HTTP 200 response schemas
+- Code formatting with Black
+- Static analysis with Ruff
+- Continuous integration with GitHub Actions
+    -This project uses **GitHub Actions** to automatically:
+    - Install project dependencies
+    - Check code formatting with Black
+    - Run Ruff linting
+    - Execute the complete Pytest test suite
+    
+## Technologies
+- Python 3.11+
+- Requests
 - Pytest
 - pytest-mock
 - pytest-cov
-- Requests
+- Black
+- Ruff
 ---
 
 ## Project Structure
@@ -48,12 +62,18 @@ SpecToTest/
 |   ├── unit_tests/  
 │   ├── conftest.py
 │
+├── pyproject.toml
 ├── requirements.txt
 └── README.md
 ```
 ---
 
 ## Installation
+
+```bash
+git clone https://github.com/ozgemeva/SpecToTest.git
+cd SpecToTest
+```
 
 Create virtual environment:
 
@@ -116,37 +136,74 @@ Tests unusual or boundary scenarios such as:
 ---
 
 ## Current Status
-Phase 1 Completed
+
+### Phase 1 Completed
 - Swagger JSON parsing
-- Endpoint path extraction
-- HTTP method validation
+- Endpoint extraction
 - Metadata extraction
-- Local file and URL-based Swagger loading
-- Mocked parser testing with Pytest
-- Edge case and negative scenario testing
-- Test coverage added
-Phase 2 In Progress
-- Request schema extraction
-- Response schema extraction
-- Swagger 2.0 body parameter handling
-- Preparing parsed endpoint data for future test generation
+- URL and local Swagger loading
+- Validation
+- Unit tests
+- Coverage reporting
+
+### Phase 2 Completed
+- Request content type extraction
+- Response content type extraction
+- HTTP 200 response schema extraction
+- Swagger body parameter handling
+- Black formatting
+- Ruff linting
 
 ## Roadmap
-- Phase 1: Swagger parser engine
-- Phase 2: Request/response schema extraction
-- Phase 3: Test scenario generation
-- Phase 4: AI-assisted test case creation
-- Phase 5: Playwright/API test generation
-- Phase 6: Test execution and reporting
+### Phase 1 — Swagger Parser Engine
+
+* Load Swagger 2.0 specifications from a remote URL
+* Fall back to a local JSON file
+* Extract paths, HTTP methods, summaries, tags, and operation IDs
+* Validate malformed Swagger structures
+
+### Phase 2 — Request and Response Schema Extraction
+
+* Extract request content types
+* Extract response content types
+* Extract HTTP 200 response schemas
+* Add unit tests for happy, negative, and edge cases
+* Add Black and Ruff code-quality checks
+
+### Phase 3 — Test Scenario Generation
+
+* Generate positive, negative, and edge-case scenarios
+* Map schemas to test inputs
+* Define expected status codes and assertions
+
+#### Phase 4 — AI-Assisted Test Case Creation
+
+* Use AI to improve generated test scenarios
+* Generate readable test descriptions
+* Suggest additional edge cases
+
+#### Phase 5 — Playwright and API Test Generation
+
+* Generate executable API tests
+* Generate Playwright-based test files
+* Create reusable fixtures and assertions
+
+#### Phase 6 — Test Execution and Reporting
+
+* Execute generated tests
+* Collect execution results
+* Produce test reports and coverage summaries
+
 
 ## Code Quality
 
 This project uses **Black** and **Ruff** to maintain a consistent and high-quality codebase.
 
 * **Black** automatically formats the code according to a standard style, making it easier to read and review.
+
 * **Ruff** performs fast linting, detects potential issues (such as unused imports, unused variables, and style violations), and can automatically fix many of them.
 
-### Commands
+### Command
 Format the project:
 
 ```bash
