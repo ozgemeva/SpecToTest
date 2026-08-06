@@ -1,23 +1,27 @@
 # This parser expects Swagger/OpenAPI format
-import requests
-from app.config import Config
 import json
+
+import requests
+
+from app.config import Config
 
 
 class SwaggerParser:
     VALID_METHODS = {"get", "post", "put", "delete", "patch"}
 
-    def __init__(self,
-        url = Config.SWAGGER_URL, # "https://petstore.swagger.io/v2/swagger.json"
-        source = Config.LOCAL_SWAGGER_FILE, # "spec/petstore.json"
-        timeout = Config.REQUEST_TIMEOUT,):
+    def __init__(
+        self,
+        url=Config.SWAGGER_URL,  # "https://petstore.swagger.io/v2/swagger.json"
+        source=Config.LOCAL_SWAGGER_FILE,  # "spec/petstore.json"
+        timeout=Config.REQUEST_TIMEOUT,
+    ):
         self.url = url
         self.source = source
         self.timeout = timeout
 
     def fetch_swagger(self):
         try:
-             
+
             response = requests.get(self.url, self.timeout)
             response.raise_for_status()  # 200 OK,404 NOTFOUND,500 ServerError
             return response.json()
@@ -29,12 +33,16 @@ class SwaggerParser:
 
     def fetch_swagger_from_file(self, file_source):
         try:
-            with open(file_source, "r", encoding="utf-8") as file:
+            with open(file_source, encoding="utf-8") as file:
                 return json.load(file)
         except FileNotFoundError as exc:
-            raise FileNotFoundError(f"Local Swagger file not found: {file_source}") from exc
+            raise FileNotFoundError(
+                f"Local Swagger file not found: {file_source}"
+            ) from exc
         except json.JSONDecodeError as exc:
-            raise ValueError(f"Local Swagger file contains invalid JSON: {file_source}") from exc
+            raise ValueError(
+                f"Local Swagger file contains invalid JSON: {file_source}"
+            ) from exc
 
     def parse_paths(self):
         swagger_data = self.fetch_swagger()  # to take json
@@ -52,7 +60,9 @@ class SwaggerParser:
         # for key, value in dict.items():
         for path, methods in paths.items():
             if not isinstance(methods, dict):
-                raise ValueError( f"Invalid path definition for '{path}': expected a dictionary")
+                raise ValueError(
+                    f"Invalid path definition for '{path}': expected a dictionary"
+                )
             # print("methods:===>" , json.dumps(methods, indent=4))
 
             for method, details in methods.items():
@@ -60,7 +70,10 @@ class SwaggerParser:
                     continue
 
                 if not isinstance(details, dict):
-                    raise ValueError( f"Invalid operation '{method}' for path '{path}': " "expected a dictionary")
+                    raise ValueError(
+                        f"Invalid operation '{method}' for path '{path}': "
+                        "expected a dictionary"
+                    )
 
                 parsed_endpoints.append(
                     {
@@ -72,12 +85,12 @@ class SwaggerParser:
                         "consumes": self.get_request_content_types(details),
                         "produces": self.get_response_content_types(details),
                         "request_schema": self.extract_request_schema(details),
-                        "response_schema":self.extract_response_schema(details),
+                        "response_schema": self.extract_response_schema(details),
                     }
                 )
 
                 # print("details:===>" , json.dumps(details, indent=4))
-        #print("parsed_endpoints:===>" , json.dumps(parsed_endpoints, indent=4))
+        # print("parsed_endpoints:===>" , json.dumps(parsed_endpoints, indent=4))
         return parsed_endpoints
 
     def get_response_content_types(self, details):
@@ -92,7 +105,7 @@ class SwaggerParser:
         parameters = details.get("parameters", [])
         # print("parameters:===>" , json.dumps(parameters, indent=4))
         for parameter in parameters:
-           # print("parameterForSchema:===>", json.dumps(parameter, indent=4))
+            # print("parameterForSchema:===>", json.dumps(parameter, indent=4))
             if parameter.get("in") == "body":
                 return parameter.get("schema")
         return None
