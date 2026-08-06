@@ -1,6 +1,7 @@
-import pytest
 import requests
+
 from app.api_parser.swagger_parser import SwaggerParser
+
 
 def test_fetch_swagger_from_local_file(tmp_path, mocker):
 
@@ -8,7 +9,10 @@ def test_fetch_swagger_from_local_file(tmp_path, mocker):
     swagger_file.write_text("""{"paths": {}}""")
 
     # URL is fail,it throws connection error instead of requests.get()
-    mocker.patch("app.api_parser.swagger_parser.requests.get",side_effect=requests.ConnectionError())
+    mocker.patch(
+        "app.api_parser.swagger_parser.requests.get",
+        side_effect=requests.ConnectionError(),
+    )
 
     parser = SwaggerParser()
     parser.source = str(swagger_file)
