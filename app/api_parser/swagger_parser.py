@@ -7,34 +7,43 @@ import json
 class SwaggerParser:
     VALID_METHODS = {"get", "post", "put", "delete", "patch"}
 
-    def __init__(self):
-        self.url = Config.SWAGGER_URL  # "https://petstore.swagger.io/v2/swagger.json"
-        self.source = Config.LOCAL_SWAGGER_FILE  # "spec/petstore.json"
+    def __init__(self,
+        url = Config.SWAGGER_URL, # "https://petstore.swagger.io/v2/swagger.json"
+        source = Config.LOCAL_SWAGGER_FILE, # "spec/petstore.json"
+        timeout = Config.REQUEST_TIMEOUT,):
+        self.url = url
+        self.source = source
+        self.timeout = timeout
 
     def fetch_swagger(self):
         try:
              
-            response = requests.get(self.url, timeout=10)
+            response = requests.get(self.url, self.timeout)
             response.raise_for_status()  # 200 OK,404 NOTFOUND,500 ServerError
             return response.json()
 
-        except requests.RequestException as e:
-            print(f"Failed to fetch from URL: {e}")
-            print("Falling back to local Swagger file...")
+        except requests.RequestException as exc:
+            print(f"Failed to fetch from {self.url}: {exc}")
+            print("Falling back to local Swagger file {self.source}")
             return self.fetch_swagger_from_file(self.source)
 
     def fetch_swagger_from_file(self, file_source):
-        with open(file_source, "r") as file:
-            return json.load(file)
+        try:
+            with open(file_source, "r", encoding="utf-8") as file:
+                return json.load(file)
+        except FileNotFoundError as exc:
+            raise FileNotFoundError(f"Local Swagger file not found: {file_source}") from exc
+        except json.JSONDecodeError as exc:
+            raise ValueError(f"Local Swagger file contains invalid JSON: {file_source}") from exc
 
     def parse_paths(self):
         swagger_data = self.fetch_swagger()  # to take json
 
         if "paths" not in swagger_data:  # json paths key
-            raise ValueError("Invalid Swagger Format")
+            raise ValueError("Invalid Swagger document: missing 'paths' field")
 
         if not isinstance(swagger_data["paths"], dict):
-            raise ValueError("Paths must be a dictionary")
+            raise ValueError("Invalid Swagger document: 'paths' must be a dictionary")
 
         paths = swagger_data["paths"]
         parsed_endpoints = []
@@ -43,7 +52,7 @@ class SwaggerParser:
         # for key, value in dict.items():
         for path, methods in paths.items():
             if not isinstance(methods, dict):
-                raise ValueError("Methods must be a dictionary")
+                raise ValueError( f"Invalid path definition for '{path}': expected a dictionary")
             # print("methods:===>" , json.dumps(methods, indent=4))
 
             for method, details in methods.items():
@@ -51,7 +60,7 @@ class SwaggerParser:
                     continue
 
                 if not isinstance(details, dict):
-                    raise ValueError("Details must be a dictionary")
+                    raise ValueError( f"Invalid operation '{method}' for path '{path}': " "expected a dictionary")
 
                 parsed_endpoints.append(
                     {
