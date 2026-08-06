@@ -13,6 +13,7 @@ class SwaggerParser:
 
     def fetch_swagger(self):
         try:
+             
             response = requests.get(self.url, timeout=10)
             response.raise_for_status()  # 200 OK,404 NOTFOUND,500 ServerError
             return response.json()
@@ -62,6 +63,7 @@ class SwaggerParser:
                         "consumes": self.get_request_content_types(details),
                         "produces": self.get_response_content_types(details),
                         "request_schema": self.extract_request_schema(details),
+                        "response_schema":self.extract_response_schema(details),
                     }
                 )
 
@@ -86,4 +88,20 @@ class SwaggerParser:
                 return parameter.get("schema")
         return None
 
-    def extract_response_schema(self,details):
+    def extract_response_schema(self, details):
+        responses = details.get("responses", {})
+
+        for status_code, response_data in responses.items():
+            #print("status_code:===>", status_code)
+            #print("response_data:===>", response_data)
+
+            if not isinstance(response_data, dict):
+                continue
+            
+            if status_code == "200":
+                schema = response_data.get("schema")
+                print("status_code:===>", status_code)
+                if schema is not None:
+                    return schema
+
+        return None
