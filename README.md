@@ -138,3 +138,35 @@ Phase 2 In Progress
 - Phase 4: AI-assisted test case creation
 - Phase 5: Playwright/API test generation
 - Phase 6: Test execution and reporting
+
+## Code Quality
+
+This project uses **Black** and **Ruff** to maintain a consistent and high-quality codebase.
+
+* **Black** automatically formats the code according to a standard style, making it easier to read and review.
+* **Ruff** performs fast linting, detects potential issues (such as unused imports, unused variables, and style violations), and can automatically fix many of them.
+
+### Commands
+Format the project:
+
+```bash
+python -m black .
+```
+
+Check formatting:
+
+```bash
+python -m black . --check
+```
+
+Run linting:
+
+```bash
+python -m ruff check .
+```
+
+Automatically fix linting issues:
+
+```bash
+python -m ruff check . --fix
+```
