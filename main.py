@@ -9,6 +9,7 @@ def main():
         print(f"request_schema: {endpoint['request_schema']}")
         print(f"response_schema: {endpoint['response_schema']}")
 
+
 """for endpoint in endpoints[:2]:
 print(f"Path: {endpoint['path']}")
 print(f"Method: {endpoint['method']}")

@@ -123,5 +123,5 @@ class SwaggerParser:
         response_data = responses.get("200")
         if not isinstance(response_data, dict):
             return None
-        
+
         return response_data.get("schema")
