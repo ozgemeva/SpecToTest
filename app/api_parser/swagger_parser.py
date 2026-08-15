@@ -22,7 +22,7 @@ class SwaggerParser:
     def fetch_swagger(self):
         try:
 
-            response = requests.get(self.url, self.timeout)
+            response = requests.get(self.url, timeout=self.timeout)
             response.raise_for_status()  # 200 OK,404 NOTFOUND,500 ServerError
             return response.json()
 
@@ -57,6 +57,11 @@ class SwaggerParser:
         parsed_endpoints = []
         # print("paths.items:===>" , json.dumps(paths, indent=4))
 
+        self.all_endpoints(paths, parsed_endpoints)
+        # print("parsed_endpoints:===>" , json.dumps(parsed_endpoints, indent=4))
+        return parsed_endpoints
+
+    def all_endpoints(self, paths, parsed_endpoints):
         # for key, value in dict.items():
         for path, methods in paths.items():
             if not isinstance(methods, dict):
@@ -90,8 +95,6 @@ class SwaggerParser:
                 )
 
                 # print("details:===>" , json.dumps(details, indent=4))
-        # print("parsed_endpoints:===>" , json.dumps(parsed_endpoints, indent=4))
-        return parsed_endpoints
 
     def get_response_content_types(self, details):
         # Returns the response content types from "produces" for Swagger 2.0
@@ -108,6 +111,7 @@ class SwaggerParser:
             # print("parameterForSchema:===>", json.dumps(parameter, indent=4))
             if parameter.get("in") == "body":
                 return parameter.get("schema")
+
         return None
 
     def extract_response_schema(self, details):
@@ -119,5 +123,5 @@ class SwaggerParser:
         response_data = responses.get("200")
         if not isinstance(response_data, dict):
             return None
-
+        
         return response_data.get("schema")
