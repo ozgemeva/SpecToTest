@@ -145,6 +145,15 @@ python -m pytest -v -s
 python -m pytest --cov=app --cov-report=term-missing
 ```
 
+## Local Validation Before Push
+
+Before pushing changes, run:
+```bash
+python -m black .
+python -m black . --check
+python -m ruff check .
+python -m pytest -v
+
 ---
 
 ## Test Categories
