@@ -55,10 +55,8 @@ class SwaggerParser:
 
         paths = swagger_data["paths"]
         parsed_endpoints = []
-        # print("paths.items:===>" , json.dumps(paths, indent=4))
 
         self.all_endpoints(paths, parsed_endpoints)
-        # print("parsed_endpoints:===>" , json.dumps(parsed_endpoints, indent=4))
         return parsed_endpoints
 
     def all_endpoints(self, paths, parsed_endpoints):
@@ -68,7 +66,6 @@ class SwaggerParser:
                 raise ValueError(
                     f"Invalid path definition for '{path}': expected a dictionary"
                 )
-            # print("methods:===>" , json.dumps(methods, indent=4))
 
             for method, details in methods.items():
                 if method.lower() not in self.VALID_METHODS:
@@ -94,8 +91,6 @@ class SwaggerParser:
                     }
                 )
 
-                # print("details:===>" , json.dumps(details, indent=4))
-
     def get_response_content_types(self, details):
         # Returns the response content types from "produces" for Swagger 2.0
         return details.get("produces", [])  #'produces': ['application/json'],
@@ -105,16 +100,16 @@ class SwaggerParser:
         return details.get("consumes", [])  #'consumes': ['multipart/form-data']
 
     def extract_request_schema(self, details):
+        # we found schema in request body
         parameters = details.get("parameters", [])
-        # print("parameters:===>" , json.dumps(parameters, indent=4))
         for parameter in parameters:
-            # print("parameterForSchema:===>", json.dumps(parameter, indent=4))
             if parameter.get("in") == "body":
                 return parameter.get("schema")
 
         return None
 
     def extract_response_schema(self, details):
+        # we found schema in response body
         responses = details.get("responses", {})
 
         if not isinstance(responses, dict):
