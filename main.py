@@ -21,11 +21,16 @@ def main():
 
         resolved = resolver.resolve_schema_ref(request_schema, swagger_data)
         extractor.extract_properties(resolved)
-        metadata = extractor.extract_properties_metadata(resolved)
+        #metadata = extractor.extract_properties_metadata(resolved)
+        nested = extractor.resolve_nested_references(resolved, swagger_data, resolver)
 
-        print(json.dumps(metadata, indent=4))
-        
-        """for endpoint in endpoints[:2]:
+        if nested:
+            print(json.dumps(nested, indent=4))
+
+
+if __name__ == "__main__":
+    main()
+"""for endpoint in endpoints[:2]:
 print(f"Path: {endpoint['path']}")
 print(f"Method: {endpoint['method']}")
 print(f"Summary: {endpoint['summary']}")
@@ -42,6 +47,3 @@ print("-" * 40)
                 # print(f\n"DETAILS:", json.dumps(details, indent=4))
 
 """
-
-if __name__ == "__main__":
-    main()

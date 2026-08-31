@@ -22,7 +22,7 @@ class SwaggerParser:
     def fetch_swagger(self):
         try:
 
-            response = requests.get(self.url, self.timeout)
+            response = requests.get(self.url, timeout=self.timeout)
             response.raise_for_status()  # 200 OK,404 NOTFOUND,500 ServerError
             return response.json()
 

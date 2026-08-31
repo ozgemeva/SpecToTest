@@ -4,16 +4,16 @@ class SchemaExtractor:
         return schema.get("type")
 
     def extract_required(self, schema):
-        return schema.get("required",[])
-   
+        return schema.get("required", [])
+
     def extract_properties(self, schema):
         return schema.get("properties", {})
 
-    def extract_properties_metadata(self,schema):
-        properties= self.extract_properties(schema)
+    def extract_properties_metadata(self, schema):
+        properties = self.extract_properties(schema)
         extracted_properties = {}
         required_fields = self.extract_required(schema)
-    
+
         for property_name, property_details in properties.items():
             is_required = property_name in required_fields
 
@@ -26,12 +26,21 @@ class SchemaExtractor:
                 "$ref": property_details.get("$ref"),
                 "required": is_required,
             }
-            
+
             extracted_properties[property_name] = {
-                key: value
-                for key, value in metadata.items()
-                if value is not None
+                key: value for key, value in metadata.items() if value is not None
             }
-                   
+
         return extracted_properties
- 
+
+    def resolve_nested_references(self, schema, swagger_data, resolver):
+        properties = self.extract_properties(schema)
+        resolved_nested_references = {}
+
+        for property_name, property_details in properties.items():
+            resolved = resolver.resolve_schema_ref(property_details, swagger_data)
+
+            if resolved != property_details:
+                resolved_nested_references[property_name] = resolved
+
+        return resolved_nested_references

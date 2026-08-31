@@ -9,7 +9,7 @@ class SchemaResolver:
 
         if not ref:
             return schema
-        
+
         model_name = self.get_model_name(ref)
         definitions = self.get_definitions(swagger_data)
 
