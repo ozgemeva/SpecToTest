@@ -44,3 +44,5 @@ class SchemaExtractor:
                 resolved_nested_references[property_name] = resolved
 
         return resolved_nested_references
+
+
