@@ -5,6 +5,8 @@ import requests
 
 from app.config import Config
 
+"""Loads Swagger data and parses API endpoints,
+including request and response schemas."""
 
 class SwaggerParser:
     VALID_METHODS = {"get", "post", "put", "delete", "patch"}

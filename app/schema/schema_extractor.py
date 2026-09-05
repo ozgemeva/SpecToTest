@@ -1,3 +1,6 @@
+"""Extracts schema properties and test-relevant metadata
+   such as type, format, enum, example, items, and required fields."""
+
 class SchemaExtractor:
 
     def extract_type(self, schema):
@@ -44,5 +47,3 @@ class SchemaExtractor:
                 resolved_nested_references[property_name] = resolved
 
         return resolved_nested_references
-
-

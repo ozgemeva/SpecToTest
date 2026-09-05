@@ -1,6 +1,9 @@
 from app.schema.schema_extractor import SchemaExtractor
 from app.schema.schema_resolver import SchemaResolver
 
+"""Processes schemas by resolving references, extracting property metadata, 
+   and resolving nested references."""
+
 
 class SchemaProcessor:
     def __init__(self):
@@ -18,6 +21,8 @@ class SchemaProcessor:
         )
 
         return {
-            "metadata": metadata,
-            "nested_references": nested_references,
+            # Extracted rules and attributes for each schema property.
+            "metadata": metadata,  
+            # Resolved schemas for properties that reference other models.
+            "nested_references": nested_references, 
         }
