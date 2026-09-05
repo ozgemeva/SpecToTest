@@ -22,7 +22,7 @@ class SchemaProcessor:
 
         return {
             # Extracted rules and attributes for each schema property.
-            "metadata": metadata,  
+            "metadata": metadata,
             # Resolved schemas for properties that reference other models.
-            "nested_references": nested_references, 
+            "nested_references": nested_references,
         }

@@ -1,5 +1,6 @@
 """Extracts schema properties and test-relevant metadata
-   such as type, format, enum, example, items, and required fields."""
+such as type, format, enum, example, items, and required fields."""
+
 
 class SchemaExtractor:
 
