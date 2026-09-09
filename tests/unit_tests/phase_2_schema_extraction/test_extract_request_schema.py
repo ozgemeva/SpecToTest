@@ -2,9 +2,9 @@ from app.api_parser.swagger_parser import SwaggerParser
 
 
 # pytest search in conftest for this swagger_body_parameter_details feature
-def test_extract_request_schema(swagger_body_parameter_details):
+def test_extract_request_schema(swagger_body_paramete_request_schema_detail_data):
     parser = SwaggerParser()
-    result = parser.extract_request_schema(swagger_body_parameter_details)
+    result = parser.extract_request_schema(swagger_body_paramete_request_schema_detail_data)
 
     assert result == {
         "$ref": "#/definitions/User"
