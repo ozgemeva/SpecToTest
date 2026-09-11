@@ -1,39 +1,51 @@
 import pytest
 
 from app.api_parser.swagger_parser import SwaggerParser
-from tests.unit_tests.mock_data.phase_1_swagger_mockdata.edge_case_swagger import (
+from tests.unit_tests.mock_data.phase_1_swagger_data_md.edge_case_swagger import (
     EDGE_CASE_SWAGGER_EXTRA_UNKNOWN_DATA,
     EDGE_CASE_SWAGGER_MISSING_DATA,
     EDGE_CASE_SWAGGER_PATHS_DATA,
     EDGE_CASE_SWAGGER_UPPERCASE_METHOD_DATA,
 )
-from tests.unit_tests.mock_data.phase_1_swagger_mockdata.invalid_swagger import (
+from tests.unit_tests.mock_data.phase_1_swagger_data_md.invalid_swagger import (
     EMPTY_INVALID_SWAGGER_DATA,
     INVALID_SWAGGER_DATA,
     ISDICT_INVALID_DETAILS_SWAGGER_DATA,
     ISDICT_INVALID_MEHTOD_SWAGGER_DATA,
     ISDICT_INVALID_SWAGGER_DATA,
 )
-from tests.unit_tests.mock_data.phase_1_swagger_mockdata.valid_swagger import (
+from tests.unit_tests.mock_data.phase_1_swagger_data_md.valid_swagger import (
     VALID_SWAGGER_DATA,
 )
-from tests.unit_tests.mock_data.phase_2_schema_mocktada.extract_request_schema import (
+from tests.unit_tests.mock_data.phase_2_schema_md.extract_request_schema import (
     REQUEST_SCHEMA_DETAILS_DATA,
     REQUEST_SCHEMA_NONE_DETAILS_DATA,
 )
-from tests.unit_tests.mock_data.phase_2_schema_mocktada.extract_responce_schema import (
+from tests.unit_tests.mock_data.phase_2_schema_md.extract_responce_schema import (
     RESPONSE_DETAILS,
     RESPONSE_NOT200_DETAILS,
     RESPONSE_NOT_DICT_DETAILS,
 )
-from tests.unit_tests.mock_data.phase_2_schema_mocktada.properties_metadata import (
+from tests.unit_tests.mock_data.phase_2_schema_md.properties_metadata import (
+    PROPERTIES_METADATA,
+    PROPERTIES_METADATA_NONE_FIELD,
     PROPERTIES_METADATA_WITH_REQUIRED,
     PROPERTIES_METADATA_WITHOUT_REQUIRED,
 )
 
 
 @pytest.fixture
-def schema_properties_wit_required():
+def schema_properties_with_none_field():
+    return PROPERTIES_METADATA_NONE_FIELD
+
+
+@pytest.fixture
+def schema_properties_metadata():
+    return PROPERTIES_METADATA
+
+
+@pytest.fixture
+def schema_properties_with_required():
     return PROPERTIES_METADATA_WITH_REQUIRED
 
 
