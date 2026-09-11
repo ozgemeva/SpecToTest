@@ -1,10 +1,10 @@
 from app.api_parser.swagger_parser import SwaggerParser
 
 
-def test_extract_response_schema(swagger_body_paramete_response_schema_detail_data):
+def test_extract_response_schema(schema_response_body_parameter_detail_data):
     parser = SwaggerParser()
     result = parser.extract_response_schema(
-        swagger_body_paramete_response_schema_detail_data
+        schema_response_body_parameter_detail_data
     )
 
     assert result == {

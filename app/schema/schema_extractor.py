@@ -14,13 +14,14 @@ class SchemaExtractor:
         return schema.get("properties", {})
 
     def extract_properties_metadata(self, schema):
+       
         properties = self.extract_properties(schema)
         extracted_properties = {}
         required_fields = self.extract_required(schema)
 
         for property_name, property_details in properties.items():
             is_required = property_name in required_fields
-
+            
             metadata = {
                 "type": property_details.get("type"),
                 "format": property_details.get("format"),
@@ -46,5 +47,6 @@ class SchemaExtractor:
 
             if resolved != property_details:
                 resolved_nested_references[property_name] = resolved
+
 
         return resolved_nested_references
