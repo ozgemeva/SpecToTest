@@ -36,13 +36,16 @@ from tests.unit_tests.mock_data.phase_2_schema_mocktada.properties_metadata impo
 def schema_properties_wit_required():
     return PROPERTIES_METADATA_WITH_REQUIRED
 
+
 @pytest.fixture
 def schema_properties_without_required():
     return PROPERTIES_METADATA_WITHOUT_REQUIRED
 
+
 @pytest.fixture
 def schema_response_body_parameter_detail_data():
     return RESPONSE_DETAILS
+
 
 @pytest.fixture
 def schema_response_body_parameter_nondict_detais_data():
@@ -62,6 +65,7 @@ def schema_request_body_parameter_none_details_data():
 @pytest.fixture
 def schema_request_body_paramete_detail_data():
     return REQUEST_SCHEMA_DETAILS_DATA
+
 
 @pytest.fixture
 def edge_case_extra_unknown_field_data():
@@ -122,6 +126,7 @@ def create_mock_parser(monkeypatch, mock_data):
     monkeypatch.setattr(SwaggerParser, "fetch_swagger", fake_fetch)
     return SwaggerParser()
 
+
 @pytest.fixture
 def parser_with_valid_mock(monkeypatch, swagger_data_valid):
     return create_mock_parser(monkeypatch, swagger_data_valid)
@@ -146,25 +151,29 @@ def parser_with_missing_fields_mock(monkeypatch, edge_case_missing_fields_data):
 def parser_with_uppercase_method_mock(monkeypatch, edge_case_uppercase_method_data):
     return create_mock_parser(monkeypatch, edge_case_uppercase_method_data)
 
+
 @pytest.fixture
 def parser_with_extra_unknown_field_mock(
     monkeypatch, edge_case_extra_unknown_field_data
 ):
     return create_mock_parser(monkeypatch, edge_case_extra_unknown_field_data)
 
+
 @pytest.fixture
 def parser_with_empty_fields_mock(monkeypatch, swagger_data_empty):
     return create_mock_parser(monkeypatch, swagger_data_empty)
+
 
 @pytest.fixture
 def parser_with_nodict_fields_mock(monkeypatch, swagger_data_isdict):
     return create_mock_parser(monkeypatch, swagger_data_isdict)
 
+
 @pytest.fixture
 def parser_with_nodict_method_fields_mock(monkeypatch, swagger_data_isdict_method):
     return create_mock_parser(monkeypatch, swagger_data_isdict_method)
 
+
 @pytest.fixture
 def parser_with_nodict_details_fields_mock(monkeypatch, swagger_data_isdict_details):
     return create_mock_parser(monkeypatch, swagger_data_isdict_details)
-
