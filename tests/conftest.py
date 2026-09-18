@@ -1,6 +1,7 @@
 import pytest
 
 from app.api_parser.swagger_parser import SwaggerParser
+from app.schema.schema_processor import SchemaProcessor
 from tests.unit_tests.mock_data.phase_1_swagger_data_md.edge_case_swagger import (
     EDGE_CASE_SWAGGER_EXTRA_UNKNOWN_DATA,
     EDGE_CASE_SWAGGER_MISSING_DATA,
@@ -26,12 +27,38 @@ from tests.unit_tests.mock_data.phase_2_schema_md.extract_responce_schema import
     RESPONSE_NOT200_DETAILS,
     RESPONSE_NOT_DICT_DETAILS,
 )
+from tests.unit_tests.mock_data.phase_2_schema_md.process_schema import (
+    PROCESS_EMPTY_SCHEMA,
+    PROCESS_EXPECTED_METADATA,
+    PROCESS_EXPECTED_NESTED,
+    PROCESS_SCHEMA,
+)
 from tests.unit_tests.mock_data.phase_2_schema_md.properties_metadata import (
     PROPERTIES_METADATA,
     PROPERTIES_METADATA_NONE_FIELD,
     PROPERTIES_METADATA_WITH_REQUIRED,
     PROPERTIES_METADATA_WITHOUT_REQUIRED,
 )
+
+
+@pytest.fixture
+def schema_process():
+    return PROCESS_SCHEMA
+
+
+@pytest.fixture
+def schema_process_expected_nested():
+    return PROCESS_EXPECTED_NESTED
+
+
+@pytest.fixture
+def schema_process_expected_metadata():
+    return PROCESS_EXPECTED_METADATA
+
+
+@pytest.fixture
+def schema_process_empty_schema():
+    return PROCESS_EMPTY_SCHEMA
 
 
 @pytest.fixture
@@ -189,3 +216,41 @@ def parser_with_nodict_method_fields_mock(monkeypatch, swagger_data_isdict_metho
 @pytest.fixture
 def parser_with_nodict_details_fields_mock(monkeypatch, swagger_data_isdict_details):
     return create_mock_parser(monkeypatch, swagger_data_isdict_details)
+
+
+# Creates a SchemaProcessor with mocked resolver and extractor dependencies.
+@pytest.fixture
+def processor_with_schema_mock(
+    monkeypatch,
+    schema_process,
+    schema_process_expected_nested,
+    schema_process_expected_metadata,
+):
+    processor = SchemaProcessor()
+
+    def fake_resolve_schema_ref(schema, swagger_data):
+        return schema_process
+
+    def fake_resolve_nested_references(resolved_schema, swagger_data, resolver):
+        return schema_process_expected_nested
+
+    def fake_extract_properties_metadata(resolved_schema):
+        return schema_process_expected_metadata
+
+    monkeypatch.setattr(
+        processor.resolver,
+        "resolve_schema_ref",
+        fake_resolve_schema_ref,
+    )
+    monkeypatch.setattr(
+        processor.extractor,
+        "extract_properties_metadata",
+        fake_extract_properties_metadata,
+    )
+    monkeypatch.setattr(
+        processor.extractor,
+        "resolve_nested_references",
+        fake_resolve_nested_references,
+    )
+
+    return processor
