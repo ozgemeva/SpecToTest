@@ -21,6 +21,8 @@ from tests.unit_tests.mock_data.phase_1_swagger_data_md.valid_swagger import (
 from tests.unit_tests.mock_data.phase_2_schema_md.extract_request_schema import (
     REQUEST_SCHEMA_DETAILS_DATA,
     REQUEST_SCHEMA_NONE_DETAILS_DATA,
+    SCHEMA_WITH_PROPERTIES,
+    SCHEMA_WITH_TYPE,
 )
 from tests.unit_tests.mock_data.phase_2_schema_md.extract_responce_schema import (
     RESPONSE_DETAILS,
@@ -39,6 +41,32 @@ from tests.unit_tests.mock_data.phase_2_schema_md.properties_metadata import (
     PROPERTIES_METADATA_WITH_REQUIRED,
     PROPERTIES_METADATA_WITHOUT_REQUIRED,
 )
+from tests.unit_tests.mock_data.phase_2_schema_md.resolution_schema import (
+    ARRAY_SCHEMA_WITH_ITEM_REF,
+    SCHEMA_WITH_DIRECT_REF,
+    SCHEMA_WITHOUT_REF,
+    SWAGGER_WITH_PET_DEFINITION,
+)
+
+
+@pytest.fixture
+def schema_without_ref():
+    return SCHEMA_WITHOUT_REF
+
+
+@pytest.fixture
+def swagger_with_pet_definition():
+    return SWAGGER_WITH_PET_DEFINITION
+
+
+@pytest.fixture
+def schema_with_direct_ref():
+    return SCHEMA_WITH_DIRECT_REF
+
+
+@pytest.fixture
+def schema_array_with_item_ref():
+    return ARRAY_SCHEMA_WITH_ITEM_REF
 
 
 @pytest.fixture
@@ -104,6 +132,16 @@ def schema_request_body_parameter_none_details_data():
 @pytest.fixture
 def schema_request_body_paramete_detail_data():
     return REQUEST_SCHEMA_DETAILS_DATA
+
+
+@pytest.fixture
+def schema_request_with_type():
+    return SCHEMA_WITH_TYPE
+
+
+@pytest.fixture
+def schema_request_with_properties():
+    return SCHEMA_WITH_PROPERTIES
 
 
 @pytest.fixture

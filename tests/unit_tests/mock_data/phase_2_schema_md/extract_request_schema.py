@@ -11,3 +11,7 @@ REQUEST_SCHEMA_NONE_DETAILS_DATA = {
         {"name": "body", "in": "xxx", "schema": {"$ref": "#/definitions/User"}},
     ]
 }
+
+SCHEMA_WITH_TYPE = {"type": "object"}
+
+SCHEMA_WITH_PROPERTIES = {"properties": {}}
