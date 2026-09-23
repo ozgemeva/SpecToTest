@@ -1,54 +1,55 @@
 # SpecToTest
 
-A Python-based Swagger 2.0 parser for automated API test generation.
+A Python-based Swagger 2.0 processing tool that parses API specifications, extracts and resolves request/response schemas, and prepares structured metadata for automated API test generation.
 
-Current scope: **Swagger 2.0**
+**Current scope: Swagger 2.0**
+
 OpenAPI 3 support may be added in later phases.
 
 ## Why SpecToTest?
 
-SpecToTest is a portfolio project focused on building a maintainable and extensible API testing framework from scratch. Each development phase adds a new capability while keeping the project tested and maintainable.
+SpecToTest is a portfolio project focused on building a maintainable and extensible API testing framework from scratch.
+
+The project is developed incrementally, with each phase introducing a new capability while maintaining automated testing, code quality checks, and continuous integration.
 
 ## Project Goal
 
-SpecToTest is a QA automation tool designed to read Swagger/OpenAPI specifications and prepare structured endpoint data for future automated test generation.
+SpecToTest is designed to parse Swagger 2.0 specifications, extract endpoint information, resolve request and response schemas, and transform schema definitions into structured metadata.
 
-The long-term goal is to generate API test scenarios and later convert them into executable Playwright/API tests.
+The long-term goal is to use this information to generate API test scenarios and eventually convert them into executable API and Playwright tests.
 
 ---
 
 ## Features
 
-* Parse Swagger 2.0 JSON specifications
-* Load Swagger specifications from a remote URL
-* Fall back to a local Swagger JSON file
-* Extract endpoint metadata:
+### Swagger Parsing
 
-  * path
-  * HTTP method
-  * summary
-  * operation ID
-  * tags
-  * consumes
-  * produces
-* Extract request content types
-* Extract response content types
-* Extract HTTP 200 response schemas
-* Validate supported HTTP methods
-* Handle malformed Swagger structures
-* Support mocked Swagger data for unit testing
-* Pytest-based test architecture
+* Load Swagger 2.0 specifications from a remote URL
+* Fall back to a local Swagger JSON file
+* Parse API paths and supported HTTP methods
+* Extract endpoint metadata such as summary, operation ID, tags, consumes, and produces
+* Handle malformed or incomplete Swagger structures
+
+### Schema Extraction and Resolution
+
+* Extract request body and HTTP 200 response schemas
+* Resolve Swagger `$ref` references to model definitions
+* Resolve references inside array items
+* Extract schema-level metadata such as type, required fields, properties, and XML metadata
+* Extract property-level metadata including type, format, enum, example, items, `$ref`, and required status
+* Resolve nested schema references
+* Process resolved schemas into structured metadata through `SchemaProcessor`
+
+### Testing and Code Quality
+
+* Pytest-based unit testing
+* Mocked Swagger data for isolated tests
 * Test coverage reporting with pytest-cov
 * Code formatting with Black
 * Static analysis with Ruff
 * Continuous integration with GitHub Actions
 
-GitHub Actions automatically:
-
-* Installs project dependencies
-* Checks code formatting with Black
-* Runs Ruff linting
-* Executes the complete Pytest test suite
+GitHub Actions automatically installs dependencies, checks Black formatting, runs Ruff linting, and executes the complete Pytest test suite.
 
 ---
 
@@ -76,14 +77,29 @@ SpecToTest/
 ├── app/
 │   ├── api_parser/
 │   │   └── swagger_parser.py
+│   │
+│   ├── schema/
+│   │   ├── schema_extractor.py
+│   │   ├── schema_processor.py
+│   │   └── schema_resolver.py
+│   │
 │   └── config.py
+│
+├── docs/
+│
+├── spec/
 │
 ├── tests/
 │   ├── unit_tests/
+│   │   ├── mock_data/
+│   │   ├── phase_1_swagger_data/
+│   │   └── phase_2_schema_extraction/
+│   │
 │   └── conftest.py
 │
 ├── main.py
 ├── pyproject.toml
+├── pytest.ini
 ├── requirements.txt
 └── README.md
 ```
@@ -133,81 +149,23 @@ Run tests with verbose output:
 python -m pytest -v
 ```
 
-Run tests and display print output:
-
-```bash
-python -m pytest -v -s
-```
-
-### Run Tests with Coverage
+Run tests with coverage:
 
 ```bash
 python -m pytest --cov=app --cov-report=term-missing
 ```
 
-## Local Validation Before Push
-
-Before pushing changes, run:
-```bash
-python -m black .
-python -m black . --check
-python -m ruff check .
-python -m pytest -v
-```
 ---
 
-## Test Categories
+## Test Strategy
 
-### Happy Path Tests
+The test suite covers:
 
-Tests valid Swagger inputs and expected parser behavior.
+* **Happy paths** — valid Swagger structures and expected behavior
+* **Negative cases** — invalid inputs, missing data, and malformed structures
+* **Edge cases** — empty paths, unknown fields, missing response data, and schema reference variations
 
-### Negative Tests
-
-Tests invalid inputs and malformed Swagger structures.
-
-### Edge Case Tests
-
-Tests unusual or boundary scenarios such as:
-
-* Missing summary
-* Missing tags
-* Empty paths
-* Malformed endpoint details
-* Unknown fields
-* Missing response data
-
----
-
-## Current Status
-
-### ✅ Phase 1 — Completed
-
-* Swagger JSON parsing
-* Endpoint extraction
-* HTTP method validation
-* Metadata extraction
-* URL and local Swagger loading
-* Swagger structure validation
-* Unit testing
-* Coverage reporting
-
-### ✅ Phase 2 — Completed
-
-* Request content type extraction
-* Response content type extraction
-* HTTP 200 response schema extraction
-* Swagger 2.0 body parameter handling
-* Black formatting
-* Ruff linting
-* GitHub Actions CI
-
-### 🚧 Phase 3 — Next
-
-* Test scenario generation
-* Schema-to-test-input mapping
-* Expected status code generation
-* Assertion generation
+Phase 2 schema-processing components are fully covered by unit tests.
 
 ---
 
@@ -215,75 +173,45 @@ Tests unusual or boundary scenarios such as:
 
 ### ✅ Phase 1 — Swagger Parser Engine
 
-* Load Swagger 2.0 specifications from a remote URL
-* Fall back to a local JSON file
-* Extract paths, HTTP methods, summaries, tags, and operation IDs
-* Validate malformed Swagger structures
+Swagger loading, validation, endpoint parsing, HTTP method handling, and endpoint metadata extraction.
 
-### ✅ Phase 2 — Request and Response Schema Extraction
+### ✅ Phase 2 — Schema Extraction and Resolution
 
-* Extract request content types
-* Extract response content types
-* Extract HTTP 200 response schemas
-* Add unit tests for happy, negative, and edge cases
-* Add Black and Ruff code-quality checks
-* Add continuous integration with GitHub Actions
+Request/response schema extraction, `$ref` resolution, array references, schema and property metadata extraction, nested reference resolution, and schema processing.
 
 ### 🚧 Phase 3 — Test Scenario Generation
 
-* Generate positive, negative, and edge-case scenarios
-* Map schemas to test inputs
-* Define expected status codes and assertions
+Generate positive, negative, and edge-case test scenarios from extracted schema information.
 
 ### 🔜 Phase 4 — AI-Assisted Test Case Creation
 
-* Use AI to improve generated test scenarios
-* Generate readable test descriptions
-* Suggest additional edge cases
+Improve generated scenarios with AI, generate readable test descriptions, and suggest additional edge cases.
 
 ### 🔜 Phase 5 — Playwright and API Test Generation
 
-* Generate executable API tests
-* Generate Playwright-based test files
-* Create reusable fixtures and assertions
+Generate executable API tests with reusable fixtures and assertions.
 
 ### 🔜 Phase 6 — Test Execution and Reporting
 
-* Execute generated tests
-* Collect execution results
-* Produce test reports and coverage summaries
+Execute generated tests and produce execution and coverage reports.
 
 ---
 
 ## Code Quality
 
-This project uses **Black** and **Ruff** to maintain a consistent and high-quality codebase.
+SpecToTest uses automated quality checks throughout development:
 
-* **Black** automatically formats the code according to a standard style, making it easier to read and review.
-* **Ruff** performs fast linting, detects potential issues such as unused imports, unused variables, and style violations, and can automatically fix many of them.
+* **Black** for consistent code formatting
+* **Ruff** for linting and static analysis
+* **Pytest** for automated unit testing
+* **pytest-cov** for coverage reporting
+* **GitHub Actions** for continuous integration
 
-### Commands
-
-Format the project:
+Before pushing changes, the project can be validated locally with:
 
 ```bash
 python -m black .
-```
-
-Check formatting:
-
-```bash
 python -m black . --check
-```
-
-Run linting:
-
-```bash
 python -m ruff check .
-```
-
-Automatically fix linting issues:
-
-```bash
-python -m ruff check . --fix
+python -m pytest -v
 ```
