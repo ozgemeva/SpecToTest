@@ -55,6 +55,7 @@ from tests.unit_tests.mock_data.phase_2_schema_md.resolution_schema import (
 def swagger_with_category_definition():
     return SWAGGER_WITH_CATEGORY_DEFINITION
 
+
 @pytest.fixture
 def schema_with_nested_reference():
     return NESTED_REFERENCE_SCHEMA

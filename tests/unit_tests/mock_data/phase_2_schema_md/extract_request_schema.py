@@ -15,4 +15,3 @@ REQUEST_SCHEMA_NONE_DETAILS_DATA = {
 SCHEMA_WITH_TYPE = {"type": "object"}
 
 SCHEMA_WITH_PROPERTIES = {"properties": {}}
-
