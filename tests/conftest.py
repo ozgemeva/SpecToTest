@@ -36,10 +36,12 @@ from tests.unit_tests.mock_data.phase_2_schema_md.process_schema import (
     PROCESS_SCHEMA,
 )
 from tests.unit_tests.mock_data.phase_2_schema_md.properties_metadata import (
+    NESTED_REFERENCE_SCHEMA,
     PROPERTIES_METADATA,
     PROPERTIES_METADATA_NONE_FIELD,
     PROPERTIES_METADATA_WITH_REQUIRED,
     PROPERTIES_METADATA_WITHOUT_REQUIRED,
+    SWAGGER_WITH_CATEGORY_DEFINITION,
 )
 from tests.unit_tests.mock_data.phase_2_schema_md.resolution_schema import (
     ARRAY_SCHEMA_WITH_ITEM_REF,
@@ -47,6 +49,15 @@ from tests.unit_tests.mock_data.phase_2_schema_md.resolution_schema import (
     SCHEMA_WITHOUT_REF,
     SWAGGER_WITH_PET_DEFINITION,
 )
+
+
+@pytest.fixture
+def swagger_with_category_definition():
+    return SWAGGER_WITH_CATEGORY_DEFINITION
+
+@pytest.fixture
+def schema_with_nested_reference():
+    return NESTED_REFERENCE_SCHEMA
 
 
 @pytest.fixture

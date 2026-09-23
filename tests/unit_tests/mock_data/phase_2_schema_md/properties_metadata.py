@@ -64,3 +64,31 @@ PROPERTIES_METADATA_NONE_FIELD = {
         },
     },
 }
+
+NESTED_REFERENCE_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "category": {
+            "$ref": "#/definitions/Category"
+        }
+    }
+}
+
+SWAGGER_WITH_CATEGORY_DEFINITION = {
+    "definitions": {
+        "Category": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
