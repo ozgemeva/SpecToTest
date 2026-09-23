@@ -1,7 +1,14 @@
+"""Resolves direct and array item schema references using Swagger definitions."""
+
+
 class SchemaResolver:
     # Resolves request/response schema references to the actual schema definition
     def resolve_schema_ref(self, schema, swagger_data):
         ref = schema.get("$ref")
+
+        if not ref and schema.get("type") == "array":
+            items = schema.get("items", {})
+            ref = items.get("$ref")
 
         if not ref:
             return schema
