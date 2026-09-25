@@ -6,9 +6,9 @@ class SchemaResolver:
     def resolve_schema_ref(self, schema, swagger_data):
         if "allOf" in schema:
             merged_schema = {
-            "type": schema.get("type", "object"),
-            "required": [],
-            "properties": {},
+                "type": schema.get("type", "object"),
+                "required": [],
+                "properties": {},
             }
 
             for part in schema["allOf"]:
@@ -17,13 +17,13 @@ class SchemaResolver:
                 if not resolved_part:
                     continue
 
-                merged_schema["required"].extend(
-                resolved_part.get("required", []))
+                merged_schema["required"].extend(resolved_part.get("required", []))
 
-                merged_schema["properties"].update(
-                resolved_part.get("properties", {}))
+                merged_schema["properties"].update(resolved_part.get("properties", {}))
 
-                merged_schema["required"] = list(dict.fromkeys(merged_schema["required"]))
+                merged_schema["required"] = list(
+                    dict.fromkeys(merged_schema["required"])
+                )
 
             return merged_schema
 
