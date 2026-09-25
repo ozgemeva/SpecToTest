@@ -2,11 +2,14 @@ import json
 
 from app.api_parser.swagger_parser import SwaggerParser
 from app.schema.schema_processor import SchemaProcessor
+from app.ai.test_planner import BuildTestPlan
+
 
 
 def main():
     parser = SwaggerParser()
     processor = SchemaProcessor()
+    aiTestPrompt = BuildTestPlan ()
 
     swagger_data = parser.fetch_swagger()
     endpoints = parser.parse_paths()
@@ -20,14 +23,18 @@ def main():
             endpoint["response_schema"],
             swagger_data,
         )
-
-        if request_result:
-            print("REQUEST")
-            print(json.dumps(request_result, indent=4))
-
-        if response_result:
-            print("RESPONSE")
-            print(json.dumps(response_result, indent=4))
+        
+        
+        # if request_result:
+        #     print("REQUEST")
+        #     print(json.dumps(request_result, indent=4))
+        
+        # if response_result:
+        #     print("RESPONSE")
+        #     print(json.dumps(response_result, indent=4))
+            
+        aiTestPrompt.build_test_planning_prompt(endpoint,request_result,response_result,)
+    
 
 
 if __name__ == "__main__":

@@ -15,6 +15,7 @@ class SchemaProcessor:
             return None
 
         resolved_schema = self.resolver.resolve_schema_ref(schema, swagger_data)
+        print("RESOLVED SCHEMA:", resolved_schema)
         metadata = self.extractor.extract_properties_metadata(resolved_schema)
         nested_references = self.extractor.resolve_nested_references(
             resolved_schema, swagger_data, self.resolver
