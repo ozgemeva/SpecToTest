@@ -1,6 +1,8 @@
 # SpecToTest
 
-A Python-based Swagger 2.0 processing tool that parses API specifications, extracts and resolves request/response schemas, and prepares structured metadata for automated API test generation.
+A Python-based Swagger 2.0 processing tool that parses API specifications,
+extracts and resolves request/response schemas, and prepares structured
+metadata for AI-assisted API test planning.
 
 **Current scope: Swagger 2.0**
 
@@ -8,15 +10,22 @@ OpenAPI 3 support may be added in later phases.
 
 ## Why SpecToTest?
 
-SpecToTest is a portfolio project focused on building a maintainable and extensible API testing framework from scratch.
+SpecToTest is a portfolio project focused on building a maintainable and
+extensible API testing framework from scratch.
 
-The project is developed incrementally, with each phase introducing a new capability while maintaining automated testing, code quality checks, and continuous integration.
+The project is developed incrementally, with each phase introducing a new
+capability while maintaining automated testing, code quality checks, and
+continuous integration.
 
 ## Project Goal
 
-SpecToTest is designed to parse Swagger 2.0 specifications, extract endpoint information, resolve request and response schemas, and transform schema definitions into structured metadata.
+SpecToTest is designed to parse Swagger 2.0 specifications, extract endpoint
+information, resolve request and response schemas, and transform schema
+definitions into structured metadata.
 
-The long-term goal is to use this information to generate API test scenarios and eventually convert them into executable API and Playwright tests.
+The current development phase introduces LLM integration so that the structured
+API information produced by the parser and schema-processing components can be
+used for AI-assisted API test planning.
 
 ---
 
@@ -40,6 +49,13 @@ The long-term goal is to use this information to generate API test scenarios and
 * Resolve nested schema references
 * Process resolved schemas into structured metadata through `SchemaProcessor`
 
+### AI Integration
+
+* OpenAI Python SDK integration
+* Secure API key configuration using environment variables
+* `.env` support with `python-dotenv`
+* AI client foundation for LLM communication
+
 ### Testing and Code Quality
 
 * Pytest-based unit testing
@@ -49,7 +65,8 @@ The long-term goal is to use this information to generate API test scenarios and
 * Static analysis with Ruff
 * Continuous integration with GitHub Actions
 
-GitHub Actions automatically installs dependencies, checks Black formatting, runs Ruff linting, and executes the complete Pytest test suite.
+GitHub Actions automatically installs dependencies, checks Black formatting,
+runs Ruff linting, and executes the complete Pytest test suite.
 
 ---
 
@@ -57,6 +74,8 @@ GitHub Actions automatically installs dependencies, checks Black formatting, run
 
 * Python 3.11+
 * Requests
+* OpenAI Python SDK
+* python-dotenv
 * Pytest
 * pytest-mock
 * pytest-cov
@@ -83,10 +102,13 @@ SpecToTest/
 │   │   ├── schema_processor.py
 │   │   └── schema_resolver.py
 │   │
+│   ├── ai/
+│   │   ├── __init__.py
+│   │   └── ai_client.py
+│   │
 │   └── config.py
 │
 ├── docs/
-│
 ├── spec/
 │
 ├── tests/
@@ -135,6 +157,40 @@ pip install -r requirements.txt
 
 ---
 
+## AI Configuration
+
+SpecToTest uses the OpenAI API for AI-assisted API test planning.
+
+API credentials are kept outside the source code using environment variables.
+
+Create a `.env` file in the project root:
+
+```text
+OPENAI_API_KEY=your_api_key
+```
+
+The `.env` file is excluded from version control through `.gitignore`.
+
+Environment variables are loaded using `python-dotenv`:
+
+```python
+from dotenv import load_dotenv
+
+load_dotenv()
+```
+
+The API key can then be accessed through the environment:
+
+```python
+import os
+
+api_key = os.getenv("OPENAI_API_KEY")
+```
+
+> Never commit API keys or other secrets to the repository.
+
+---
+
 ## Running Tests
 
 Run all tests:
@@ -165,7 +221,7 @@ The test suite covers:
 * **Negative cases** — invalid inputs, missing data, and malformed structures
 * **Edge cases** — empty paths, unknown fields, missing response data, and schema reference variations
 
-Phase 2 schema-processing components are fully covered by unit tests.
+Phase 2 schema-processing components are covered by unit tests.
 
 ---
 
@@ -173,27 +229,37 @@ Phase 2 schema-processing components are fully covered by unit tests.
 
 ### ✅ Phase 1 — Swagger Parser Engine
 
-Swagger loading, validation, endpoint parsing, HTTP method handling, and endpoint metadata extraction.
+Swagger loading, validation, endpoint parsing, HTTP method handling, and
+endpoint metadata extraction.
 
 ### ✅ Phase 2 — Schema Extraction and Resolution
 
-Request/response schema extraction, `$ref` resolution, array references, schema and property metadata extraction, nested reference resolution, and schema processing.
+Request/response schema extraction, `$ref` resolution, array references,
+schema and property metadata extraction, nested reference resolution, and
+schema processing.
 
-### 🚧 Phase 3 — Test Scenario Generation
+### 🚧 Phase 3 — AI Test Planning
 
-Generate positive, negative, and edge-case test scenarios from extracted schema information.
+Integrate an LLM into SpecToTest and use the structured endpoint and schema
+information produced by Phase 1 and Phase 2 to support AI-assisted API test
+planning.
 
-### 🔜 Phase 4 — AI-Assisted Test Case Creation
+Current work:
 
-Improve generated scenarios with AI, generate readable test descriptions, and suggest additional edge cases.
+* AI integration foundation
+* OpenAI Python SDK integration
+* Secure API key configuration
+* Environment variable loading
+* AI client setup
 
-### 🔜 Phase 5 — Playwright and API Test Generation
+---
 
-Generate executable API tests with reusable fixtures and assertions.
+## Documentation
 
-### 🔜 Phase 6 — Test Execution and Reporting
-
-Execute generated tests and produce execution and coverage reports.
+* OpenAI API Documentation: https://developers.openai.com/api/docs
+* OpenAI Python SDK: https://github.com/openai/openai-python
+* python-dotenv: https://pypi.org/project/python-dotenv/
+* Python `os.getenv`: https://docs.python.org/3/library/os.html#os.getenv
 
 ---
 
