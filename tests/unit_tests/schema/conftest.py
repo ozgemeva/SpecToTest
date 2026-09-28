@@ -2,40 +2,40 @@ import pytest
 
 from app.api_parser.swagger_parser import SwaggerParser
 from app.schema.schema_processor import SchemaProcessor
-from tests.unit_tests.mock_data.phase_1_swagger_data_md.edge_case_swagger import (
+from tests.unit_tests.mock_data.schema_md.phase_1_swagger_data_md.edge_case_swagger import (
     EDGE_CASE_SWAGGER_EXTRA_UNKNOWN_DATA,
     EDGE_CASE_SWAGGER_MISSING_DATA,
     EDGE_CASE_SWAGGER_PATHS_DATA,
     EDGE_CASE_SWAGGER_UPPERCASE_METHOD_DATA,
 )
-from tests.unit_tests.mock_data.phase_1_swagger_data_md.invalid_swagger import (
+from tests.unit_tests.mock_data.schema_md.phase_1_swagger_data_md.invalid_swagger import (
     EMPTY_INVALID_SWAGGER_DATA,
     INVALID_SWAGGER_DATA,
     ISDICT_INVALID_DETAILS_SWAGGER_DATA,
     ISDICT_INVALID_MEHTOD_SWAGGER_DATA,
     ISDICT_INVALID_SWAGGER_DATA,
 )
-from tests.unit_tests.mock_data.phase_1_swagger_data_md.valid_swagger import (
+from tests.unit_tests.mock_data.schema_md.phase_1_swagger_data_md.valid_swagger import (
     VALID_SWAGGER_DATA,
 )
-from tests.unit_tests.mock_data.phase_2_schema_md.extract_request_schema import (
+from tests.unit_tests.mock_data.schema_md.phase_2_schema_md.extract_request_schema import (
     REQUEST_SCHEMA_DETAILS_DATA,
     REQUEST_SCHEMA_NONE_DETAILS_DATA,
     SCHEMA_WITH_PROPERTIES,
     SCHEMA_WITH_TYPE,
 )
-from tests.unit_tests.mock_data.phase_2_schema_md.extract_responce_schema import (
+from tests.unit_tests.mock_data.schema_md.phase_2_schema_md.extract_responce_schema import (
     RESPONSE_DETAILS,
     RESPONSE_NOT200_DETAILS,
     RESPONSE_NOT_DICT_DETAILS,
 )
-from tests.unit_tests.mock_data.phase_2_schema_md.process_schema import (
+from tests.unit_tests.mock_data.schema_md.phase_2_schema_md.process_schema import (
     PROCESS_EMPTY_SCHEMA,
     PROCESS_EXPECTED_METADATA,
     PROCESS_EXPECTED_NESTED,
     PROCESS_SCHEMA,
 )
-from tests.unit_tests.mock_data.phase_2_schema_md.properties_metadata import (
+from tests.unit_tests.mock_data.schema_md.phase_2_schema_md.properties_metadata import (
     NESTED_REFERENCE_SCHEMA,
     PROPERTIES_METADATA,
     PROPERTIES_METADATA_NONE_FIELD,
@@ -43,13 +43,49 @@ from tests.unit_tests.mock_data.phase_2_schema_md.properties_metadata import (
     PROPERTIES_METADATA_WITHOUT_REQUIRED,
     SWAGGER_WITH_CATEGORY_DEFINITION,
 )
-from tests.unit_tests.mock_data.phase_2_schema_md.resolution_schema import (
+from tests.unit_tests.mock_data.schema_md.phase_2_schema_md.resolution_schema import (
     ARRAY_SCHEMA_WITH_ITEM_REF,
     SCHEMA_WITH_DIRECT_REF,
     SCHEMA_WITHOUT_REF,
     SWAGGER_WITH_PET_DEFINITION,
+    EXPECTED_ALLOF_SCHEMA,
+    SCHEMA_WITH_ALLOF,
+    EXPECTED_ALLOF_WITH_EMPTY_PART,
+    SCHEMA_WITH_ALLOF_EMPTY_PART,
+    SCHEMA_WITH_UNKNOWN_REF,
+    SWAGGER_WITHOUT_REFERENCED_DEFINITION,
 )
 
+@pytest.fixture
+def schema_with_unknown_ref():
+    return SCHEMA_WITH_UNKNOWN_REF
+
+
+@pytest.fixture
+def swagger_without_referenced_definition():
+    return SWAGGER_WITHOUT_REFERENCED_DEFINITION
+
+@pytest.fixture
+def resolver():
+    processor = SchemaProcessor()
+    return processor.resolver
+
+@pytest.fixture
+def schema_with_allof_empty_part():
+    return SCHEMA_WITH_ALLOF_EMPTY_PART
+
+
+@pytest.fixture
+def expected_allof_with_empty_part():
+    return EXPECTED_ALLOF_WITH_EMPTY_PART
+
+@pytest.fixture
+def schema_with_allof():
+    return SCHEMA_WITH_ALLOF
+
+@pytest.fixture
+def expected_allof_schema():
+    return EXPECTED_ALLOF_SCHEMA
 
 @pytest.fixture
 def swagger_with_category_definition():

@@ -1,8 +1,7 @@
-import json
-
 
 class BuildTestPlan:
-
+# Preapered prompt
+#We will this prompt as input send  to LLM (LLM will be AI model such as: gpt-5.6-luna) 
     def build_test_planning_prompt(self, endpoint, request_schema, response_schema):
         prompt = f"""
         Generate API test scenarios using the API information provided below.
@@ -22,15 +21,11 @@ class BuildTestPlan:
         target, rule, endpoint, http_method, path_params, query_params,
         request_body, expected_status, and expected_result.
         
-        API endpoint:
-        {json.dumps(endpoint, indent=4)}
+        API endpoint:{endpoint}
 
-        request schema metadata:
-        {json.dumps(request_schema, indent=4)}
+        request schema metadata:{request_schema}
 
-        response schema metadata:
-        {json.dumps(response_schema, indent=4)}
+        response schema metadata:{response_schema}
+        
         """
-
-        print(prompt)
         return prompt
