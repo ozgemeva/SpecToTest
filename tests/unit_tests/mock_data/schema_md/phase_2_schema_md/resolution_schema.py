@@ -62,10 +62,6 @@ EXPECTED_ALLOF_WITH_EMPTY_PART = {
     },
 }
 
-SCHEMA_WITH_UNKNOWN_REF = {
-    "$ref": "#/definitions/UnknownModel"
-}
+SCHEMA_WITH_UNKNOWN_REF = {"$ref": "#/definitions/UnknownModel"}
 
-SWAGGER_WITHOUT_REFERENCED_DEFINITION = {
-    "definitions": {}
-}
+SWAGGER_WITHOUT_REFERENCED_DEFINITION = {"definitions": {}}

@@ -1,7 +1,5 @@
-
 class BuildTestPlan:
-# Preapered prompt
-#We will this prompt as input send  to LLM (LLM will be AI model such as: gpt-5.6-luna) 
+    # Builds the prompt used as input for the LLM.
     def build_test_planning_prompt(self, endpoint, request_schema, response_schema):
         prompt = f"""
         Generate API test scenarios using the API information provided below.

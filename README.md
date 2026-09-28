@@ -1,8 +1,8 @@
 # SpecToTest
 
 A Python-based Swagger 2.0 processing tool that parses API specifications,
-extracts and resolves request/response schemas, and prepares structured
-metadata for AI-assisted API test planning.
+extracts and resolves request/response schemas, and prepares structured metadata
+for AI-assisted API test planning.
 
 **Current scope: Swagger 2.0**
 
@@ -13,19 +13,16 @@ OpenAPI 3 support may be added in later phases.
 SpecToTest is a portfolio project focused on building a maintainable and
 extensible API testing framework from scratch.
 
-The project is developed incrementally, with each phase introducing a new
-capability while maintaining automated testing, code quality checks, and
-continuous integration.
+The project is developed incrementally, with automated testing, code quality
+checks, and continuous integration throughout development.
 
 ## Project Goal
 
-SpecToTest is designed to parse Swagger 2.0 specifications, extract endpoint
-information, resolve request and response schemas, and transform schema
-definitions into structured metadata.
+SpecToTest parses Swagger 2.0 specifications, extracts endpoint information,
+resolves request and response schemas, and transforms them into structured
+metadata.
 
-The current development phase introduces LLM integration so that the structured
-API information produced by the parser and schema-processing components can be
-used for AI-assisted API test planning.
+The current phase introduces LLM integration for AI-assisted API test planning.
 
 ---
 
@@ -33,40 +30,36 @@ used for AI-assisted API test planning.
 
 ### Swagger Parsing
 
-* Load Swagger 2.0 specifications from a remote URL
-* Fall back to a local Swagger JSON file
+* Load Swagger specifications from URL or local JSON
 * Parse API paths and supported HTTP methods
-* Extract endpoint metadata such as summary, operation ID, tags, consumes, and produces
+* Extract endpoint metadata
 * Handle malformed or incomplete Swagger structures
 
 ### Schema Extraction and Resolution
 
-* Extract request body and HTTP 200 response schemas
-* Resolve Swagger `$ref` references to model definitions
-* Resolve references inside array items
-* Extract schema-level metadata such as type, required fields, properties, and XML metadata
-* Extract property-level metadata including type, format, enum, example, items, `$ref`, and required status
-* Resolve nested schema references
-* Process resolved schemas into structured metadata through `SchemaProcessor`
+* Extract request and response schemas
+* Resolve Swagger `$ref` references
+* Resolve array and nested references
+* Resolve Swagger `allOf` schema compositions
+* Extract schema and property metadata
+* Process schemas into structured metadata
 
 ### AI Integration
 
 * OpenAI Python SDK integration
-* Secure API key configuration using environment variables
-* `.env` support with `python-dotenv`
-* AI client foundation for LLM communication
+* Secure API key configuration with environment variables
+* Prompt generation from endpoint and schema metadata
+* LLM client for AI communication
+* Mocked LLM responses for isolated testing
 
 ### Testing and Code Quality
 
-* Pytest-based unit testing
-* Mocked Swagger data for isolated tests
-* Test coverage reporting with pytest-cov
-* Code formatting with Black
-* Static analysis with Ruff
-* Continuous integration with GitHub Actions
-
-GitHub Actions automatically installs dependencies, checks Black formatting,
-runs Ruff linting, and executes the complete Pytest test suite.
+* Pytest unit tests
+* Mock and monkeypatch-based testing
+* Test coverage with pytest-cov
+* Black formatting
+* Ruff linting
+* GitHub Actions CI
 
 ---
 
@@ -85,49 +78,6 @@ runs Ruff linting, and executes the complete Pytest test suite.
 
 ---
 
-## Project Structure
-
-```text
-SpecToTest/
-├── .github/
-│   └── workflows/
-│       └── ci.yml
-│
-├── app/
-│   ├── api_parser/
-│   │   └── swagger_parser.py
-│   │
-│   ├── schema/
-│   │   ├── schema_extractor.py
-│   │   ├── schema_processor.py
-│   │   └── schema_resolver.py
-│   │
-│   ├── ai/
-│   │   ├── __init__.py
-│   │   └── ai_client.py
-│   │
-│   └── config.py
-│
-├── docs/
-├── spec/
-│
-├── tests/
-│   ├── unit_tests/
-│   │   ├── mock_data/
-│   │   ├── phase_1_swagger_data/
-│   │   └── phase_2_schema_extraction/
-│   │
-│   └── conftest.py
-│
-├── main.py
-├── pyproject.toml
-├── pytest.ini
-├── requirements.txt
-└── README.md
-```
-
----
-
 ## Installation
 
 Clone the repository:
@@ -137,15 +87,10 @@ git clone https://github.com/ozgemeva/SpecToTest.git
 cd SpecToTest
 ```
 
-Create a virtual environment:
+Create and activate a virtual environment:
 
 ```bash
 python -m venv venv
-```
-
-Activate the virtual environment:
-
-```bash
 source venv/bin/activate
 ```
 
@@ -159,33 +104,13 @@ pip install -r requirements.txt
 
 ## AI Configuration
 
-SpecToTest uses the OpenAI API for AI-assisted API test planning.
-
-API credentials are kept outside the source code using environment variables.
-
 Create a `.env` file in the project root:
 
 ```text
 OPENAI_API_KEY=your_api_key
 ```
 
-The `.env` file is excluded from version control through `.gitignore`.
-
-Environment variables are loaded using `python-dotenv`:
-
-```python
-from dotenv import load_dotenv
-
-load_dotenv()
-```
-
-The API key can then be accessed through the environment:
-
-```python
-import os
-
-api_key = os.getenv("OPENAI_API_KEY")
-```
+The `.env` file is excluded from version control.
 
 > Never commit API keys or other secrets to the repository.
 
@@ -199,12 +124,6 @@ Run all tests:
 python -m pytest
 ```
 
-Run tests with verbose output:
-
-```bash
-python -m pytest -v
-```
-
 Run tests with coverage:
 
 ```bash
@@ -213,71 +132,43 @@ python -m pytest --cov=app --cov-report=term-missing
 
 ---
 
-## Test Strategy
-
-The test suite covers:
-
-* **Happy paths** — valid Swagger structures and expected behavior
-* **Negative cases** — invalid inputs, missing data, and malformed structures
-* **Edge cases** — empty paths, unknown fields, missing response data, and schema reference variations
-
-Phase 2 schema-processing components are covered by unit tests.
-
----
-
 ## Roadmap
 
 ### ✅ Phase 1 — Swagger Parser Engine
 
-Swagger loading, validation, endpoint parsing, HTTP method handling, and
-endpoint metadata extraction.
+Swagger loading, validation, endpoint parsing, and metadata extraction.
 
 ### ✅ Phase 2 — Schema Extraction and Resolution
 
-Request/response schema extraction, `$ref` resolution, array references,
-schema and property metadata extraction, nested reference resolution, and
-schema processing.
+Request/response schema extraction, `$ref` resolution, `allOf` handling,
+nested references, and structured schema metadata.
 
 ### 🚧 Phase 3 — AI Test Planning
 
-Integrate an LLM into SpecToTest and use the structured endpoint and schema
-information produced by Phase 1 and Phase 2 to support AI-assisted API test
-planning.
+LLM integration for AI-assisted API test planning.
 
-Current work:
+Completed so far:
 
-* AI integration foundation
-* OpenAI Python SDK integration
-* Secure API key configuration
-* Environment variable loading
-* AI client setup
+* OpenAI integration foundation
+* Prompt builder
+* LLM client
+* Mocked LLM response testing
 
----
+Next:
 
-## Documentation
-
-* OpenAI API Documentation: https://developers.openai.com/api/docs
-* OpenAI Python SDK: https://github.com/openai/openai-python
-* python-dotenv: https://pypi.org/project/python-dotenv/
-* Python `os.getenv`: https://docs.python.org/3/library/os.html#os.getenv
+* Complete LLM client tests
+* Perform the first real LLM request
+* Parse and validate structured LLM output
 
 ---
 
 ## Code Quality
 
-SpecToTest uses automated quality checks throughout development:
-
-* **Black** for consistent code formatting
-* **Ruff** for linting and static analysis
-* **Pytest** for automated unit testing
-* **pytest-cov** for coverage reporting
-* **GitHub Actions** for continuous integration
-
-Before pushing changes, the project can be validated locally with:
+The project uses Black, Ruff, Pytest, and GitHub Actions for automated
+formatting, linting, testing, and continuous integration.
 
 ```bash
-python -m black .
 python -m black . --check
 python -m ruff check .
-python -m pytest -v
+python -m pytest
 ```
