@@ -25,7 +25,8 @@ def main():
 
         # its processed request/response schema metadata.
         # if request_result:
-        #     print("REQUEST")
+        #     print("REQ
+        # UEST")
         #     print(json.dumps(request_result, indent=4))
 
         # if response_result:

@@ -130,6 +130,11 @@ Run tests with coverage:
 python -m pytest --cov=app --cov-report=term-missing
 ```
 
+Run a specific AI test file:
+```bash
+python -m pytest tests/unit_tests/AI/
+python -m pytest tests/unit_tests/AI/phase_3_ai/test_send_prompt.py -v
+```
 ---
 
 ## Roadmap

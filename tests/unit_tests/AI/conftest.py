@@ -6,8 +6,8 @@ from app.ai.llm_client import LlmClient
 from tests.unit_tests.mock_data.llm_md.llm_response_md import (
     LLM_RESPONSE,
     TEMP_PROMPT,
+    LLM_REQUEST
 )
-
 
 # cteate fake client for OpenAI
 def create_mock_llm_client(monkeypatch, mock_data):
@@ -39,3 +39,8 @@ def llm_client_with_llm_response():
 @pytest.fixture
 def llm_client_temp_input():
     return TEMP_PROMPT
+
+@pytest.fixture
+def llm_test_planning_request():
+    return LLM_REQUEST
+

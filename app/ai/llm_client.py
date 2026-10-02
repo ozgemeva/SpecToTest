@@ -9,6 +9,7 @@ class LlmClient:
     def __init__(self):
         load_dotenv()
         api_key = os.getenv("OPENAI_API_KEY")
+        
         if not api_key:
             raise ValueError("OpenAI API key not found.")
         self.client = OpenAI(api_key=api_key)
