@@ -5,3 +5,4 @@ pytest-cov==7.1.0
 black==26.5.1
 ruff==0.16.1
 openai==3.19.2
+python-dotenv
