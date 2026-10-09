@@ -35,6 +35,7 @@ def create_mock_llm_client(monkeypatch, mock_data):
 
 @pytest.fixture
 def llm_client_with_mock(monkeypatch, llm_client_with_llm_response):
+    monkeypatch.setenv("OPENAI_API_KEY", "fake-test-key")
     return create_mock_llm_client(monkeypatch, llm_client_with_llm_response)
 
 
