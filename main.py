@@ -1,6 +1,8 @@
-from app.ai.test_planner import BuildTestPlan
+from app.ai.test_planner import BuildTestPlan 
+from app.ai.response_parser import ResponseParser
 from app.api_parser.swagger_parser import SwaggerParser
 from app.schema.schema_processor import SchemaProcessor
+
 
 
 def main():
@@ -44,12 +46,13 @@ def main():
         # Print the complete prompt to verify the data
         # before sending it to the LLM.
         if ai_result:
-            print("AI PROMPT")
-            print(ai_result)
-
-            # TEMPORARY: Process only the first endpoint
-            # while testing the initial LLM integration.
-            break
+                    print("AI PROMPT")
+                    print(ai_result)
+        
+                    # TEMPORARY: Process only the first endpoint
+                    # while testing the initial LLM integration.
+                    break
+       
 
 
 if __name__ == "__main__":

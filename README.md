@@ -128,6 +128,7 @@ Run tests with coverage:
 
 ```bash
 python -m pytest --cov=app --cov-report=term-missing
+python -m pytest tests/unit_tests/AI/ --cov=app.ai --cov-report=term-missing
 ```
 
 Run a specific AI test file:

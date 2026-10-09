@@ -7,6 +7,9 @@ from tests.unit_tests.mock_data.llm_md.llm_response_md import (
     LLM_RESPONSE,
     TEMP_PROMPT,
     INVALID_LLM_RESPONSE,
+    LLM_RESPONSE_MISSING_FIELD,
+    LLM_RESPONSE_LIST,
+    LLM_RESPONSE_WITH_NODICT_NOLIST
 )
 
 from tests.unit_tests.mock_data.llm_md.llm_request_md import(
@@ -52,3 +55,14 @@ def llm_test_planning_request():
 def llm_client_with_invalid_llm_response():
     return INVALID_LLM_RESPONSE
 
+@pytest.fixture
+def llm_client_with_missing_field_llm_response():
+    return LLM_RESPONSE_MISSING_FIELD
+
+@pytest.fixture
+def llm_client_with_list_llm_response():
+    return LLM_RESPONSE_LIST
+
+@pytest.fixture
+def llm_response_with_nodict_nolist():
+    return LLM_RESPONSE_WITH_NODICT_NOLIST
