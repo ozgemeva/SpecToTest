@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - phase-2-schema-extraction
+      - phase-3-test-scenario-generation
   pull_request:
   workflow_dispatch:
     
