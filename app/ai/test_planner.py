@@ -16,7 +16,7 @@ class BuildTestPlan:
         {data_for_prompt}
         {output_prompt}
         """
-        
+
         return prompt
 
     def build_output_format(self):
@@ -35,9 +35,12 @@ class BuildTestPlan:
                 Generate API test scenarios using the API information provided below.
                 Instructions:
                 1. Use the provided API endpoint and HTTP method.
-                2. Use the request schema metadata to generate test scenarios for the request data.
-                3. Use the response schema metadata to generate test scenarios for validating the expected API response.
-                4. Generate positive, negative,and edge test scenarios based on the provided schema rules.
+                2. Use the request schema metadata to generate test scenarios
+                for the request data.
+                3. Use the response schema metadata to generate test scenarios
+                for validating the expected API response.
+                4. Generate positive, negative,and edge test scenarios
+                based on the provided schema rules.
                 5. Use only the rules defined in the API specification. 
                 Do not invent unsupported business rules or constraints.
                 """

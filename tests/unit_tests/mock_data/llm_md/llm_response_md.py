@@ -91,4 +91,4 @@ LLM_RESPONSE_LIST = [
     },
 ]
 
-LLM_RESPONSE_WITH_NODICT_NOLIST= "no dict,no list"
+LLM_RESPONSE_WITH_NODICT_NOLIST = "no dict,no list"

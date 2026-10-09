@@ -3,18 +3,18 @@ from types import SimpleNamespace
 import pytest
 
 from app.ai.llm_client import LlmClient
-from tests.unit_tests.mock_data.llm_md.llm_response_md import (
-    LLM_RESPONSE,
-    TEMP_PROMPT,
-    INVALID_LLM_RESPONSE,
-    LLM_RESPONSE_MISSING_FIELD,
-    LLM_RESPONSE_LIST,
-    LLM_RESPONSE_WITH_NODICT_NOLIST
-)
-
-from tests.unit_tests.mock_data.llm_md.llm_request_md import(
+from tests.unit_tests.mock_data.llm_md.llm_request_md import (
     LLM_REQUEST,
 )
+from tests.unit_tests.mock_data.llm_md.llm_response_md import (
+    INVALID_LLM_RESPONSE,
+    LLM_RESPONSE,
+    LLM_RESPONSE_LIST,
+    LLM_RESPONSE_MISSING_FIELD,
+    LLM_RESPONSE_WITH_NODICT_NOLIST,
+    TEMP_PROMPT,
+)
+
 
 # cteate fake client for OpenAI
 def create_mock_llm_client(monkeypatch, mock_data):
@@ -47,21 +47,26 @@ def llm_client_with_llm_response():
 def llm_client_temp_input():
     return TEMP_PROMPT
 
+
 @pytest.fixture
 def llm_test_planning_request():
     return LLM_REQUEST
+
 
 @pytest.fixture
 def llm_client_with_invalid_llm_response():
     return INVALID_LLM_RESPONSE
 
+
 @pytest.fixture
 def llm_client_with_missing_field_llm_response():
     return LLM_RESPONSE_MISSING_FIELD
 
+
 @pytest.fixture
 def llm_client_with_list_llm_response():
     return LLM_RESPONSE_LIST
+
 
 @pytest.fixture
 def llm_response_with_nodict_nolist():
