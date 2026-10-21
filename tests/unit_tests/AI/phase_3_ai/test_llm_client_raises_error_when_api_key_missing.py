@@ -1,4 +1,3 @@
-
 import pytest
 
 from app.ai.llm_client import LlmClient
