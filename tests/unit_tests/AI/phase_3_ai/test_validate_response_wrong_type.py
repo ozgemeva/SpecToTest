@@ -3,6 +3,8 @@ import pytest
 from app.ai.response_parser import ResponseParser
 
 
+# Verify that response validation raises TypeError
+# when LLM response fields contain incorrect data types.
 @pytest.mark.parametrize(
     "field, wrong_value",
     [

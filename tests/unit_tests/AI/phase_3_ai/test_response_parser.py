@@ -3,6 +3,8 @@ import json
 from app.ai.response_parser import ResponseParser
 
 
+# Verify that a valid JSON response is parsed correctly
+# and matches the original Python data.
 def test_response_parser(llm_client_with_llm_response):
     output_text = json.dumps(llm_client_with_llm_response)
     rp = ResponseParser()

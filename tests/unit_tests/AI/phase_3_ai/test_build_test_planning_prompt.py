@@ -1,6 +1,8 @@
 from app.ai.test_planner import BuildTestPlan
 
 
+# Verify that the generated LLM prompt contains the endpoint details,
+# request/response schemas, and required test generation instructions.
 def test_build_test_planning_prompt(llm_test_planning_request):
     variable = BuildTestPlan()
 

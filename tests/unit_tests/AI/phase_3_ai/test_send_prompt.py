@@ -1,3 +1,5 @@
+# Verify that send_prompt returns the expected LLM response
+# using a mocked API client without making a real API request.
 def test_send_prompt(
     llm_client_with_mock,
     llm_client_temp_input,
