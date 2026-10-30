@@ -1,4 +1,1 @@
-MOCK_ENDPOINT = {
-    "path": "/pet",
-    "method": "POST"
-}
+MOCK_ENDPOINT = {"path": "/pet", "method": "POST"}

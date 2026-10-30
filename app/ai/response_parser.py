@@ -62,24 +62,25 @@ class ResponseParser:
         else:
             raise TypeError("Response must be a dict or list")
 
-    def validate_response_values(self,parsed_response):
+    def validate_response_values(self, parsed_response):
         if parsed_response["test_type"] not in ["positive", "negative", "edge"]:
             raise ValueError("Invalid test type")
-        
-        #endpoint = swagger endpoint, parsed_response=LLM 
-    def validate_schema_consistency(self,parsed_response,endpoint):
-        
-        if parsed_response["http_method"].upper() not in ["GET", "POST", "PUT", "PATCH", "DELETE"]:
-                    raise ValueError("Invalid http method")
-        
+
+        # endpoint = swagger endpoint, parsed_response=LLM
+
+    def validate_schema_consistency(self, parsed_response, endpoint):
+
+        if parsed_response["http_method"].upper() not in [
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE",
+        ]:
+            raise ValueError("Invalid http method")
+
         if parsed_response["http_method"].upper() != endpoint["method"].upper():
             raise ValueError("HTTP method does not match Swagger specification")
-        
+
         if parsed_response["endpoint"] != endpoint["path"]:
             raise ValueError("Path does not match Swagger Path")
-
-       
-
-          
-        
-        

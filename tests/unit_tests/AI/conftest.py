@@ -14,7 +14,6 @@ from tests.unit_tests.mock_data.llm_md.llm_response_md import (
     LLM_RESPONSE_WITH_NODICT_NOLIST,
     TEMP_PROMPT,
 )
-
 from tests.unit_tests.mock_data.llm_md.swagger_endpoint_md import MOCK_ENDPOINT
 
 
