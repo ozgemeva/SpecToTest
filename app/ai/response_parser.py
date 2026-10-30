@@ -10,6 +10,7 @@ class ResponseParser:
     def validate(self, parsed_response):
         self.validate_response(parsed_response)
         self.validate_response_type(parsed_response)
+        self.validate_response_values(parsed_response)
 
     def validate_response(self, parsed_response):
         required_fields = [
@@ -48,16 +49,18 @@ class ResponseParser:
                 raise TypeError(f"Invalid type for {field}")
 
     # Validate each scenario individually using the same rules.
-    def validate_scenarios(self, parsed_response):
+    def validate_scenarios(self, parsed_response, endpoint):
+
         # A single test scenario is represented as a dictionary.
         if isinstance(parsed_response, dict):
             self.validate(parsed_response)
+            self.validate_schema_consistency(parsed_response, endpoint)
 
         # Multiple test scenarios are represented as a list.
         elif isinstance(parsed_response, list):
             for scenario in parsed_response:
                 self.validate(scenario)
-
+                self.validate_schema_consistency(scenario, endpoint)
         # Reject unexpected response formats.
         else:
             raise TypeError("Response must be a dict or list")
