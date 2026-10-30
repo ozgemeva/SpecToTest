@@ -15,6 +15,8 @@ from tests.unit_tests.mock_data.llm_md.llm_response_md import (
     TEMP_PROMPT,
 )
 
+from tests.unit_tests.mock_data.llm_md.swagger_endpoint_md import MOCK_ENDPOINT
+
 
 # cteate fake client for OpenAI
 def create_mock_llm_client(monkeypatch, mock_data):
@@ -72,3 +74,8 @@ def llm_client_with_list_llm_response():
 @pytest.fixture
 def llm_response_with_nodict_nolist():
     return LLM_RESPONSE_WITH_NODICT_NOLIST
+
+
+@pytest.fixture
+def llm_swagger_endpoint():
+    return MOCK_ENDPOINT

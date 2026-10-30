@@ -1,0 +1,11 @@
+import pytest
+from app.ai.response_parser import ResponseParser
+ 
+def test_validate_response_values_invalid_test_type(llm_client_with_llm_response):
+    mock_response= llm_client_with_llm_response.copy()
+    mock_response["test_type"]= "INVALIDTESTTYPE"
+    
+    rp = ResponseParser()
+   
+    with pytest.raises(ValueError, match="Invalid test type"):
+        rp.validate_response_values(mock_response)
