@@ -109,5 +109,3 @@ INVALID_SCENARIO_RESPONSE = {
     "expected_status": 200,
     "expected_result": "Pet is created successfully",
 }
-
-
