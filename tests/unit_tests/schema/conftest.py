@@ -2,40 +2,40 @@ import pytest
 
 from app.api_parser.swagger_parser import SwaggerParser
 from app.schema.schema_processor import SchemaProcessor
-from tests.unit_tests.mock_data.schema_md.phase_1_swagger_data_md.edge_case_swagger import (  # noqa: E501
+from tests.mock_data.schema_md.phase_1_swagger_data_md.edge_case_swagger import (  # noqa: E501
     EDGE_CASE_SWAGGER_EXTRA_UNKNOWN_DATA,
     EDGE_CASE_SWAGGER_MISSING_DATA,
     EDGE_CASE_SWAGGER_PATHS_DATA,
     EDGE_CASE_SWAGGER_UPPERCASE_METHOD_DATA,
 )
-from tests.unit_tests.mock_data.schema_md.phase_1_swagger_data_md.invalid_swagger import (  # noqa: E501
+from tests.mock_data.schema_md.phase_1_swagger_data_md.invalid_swagger import (  # noqa: E501
     EMPTY_INVALID_SWAGGER_DATA,
     INVALID_SWAGGER_DATA,
     ISDICT_INVALID_DETAILS_SWAGGER_DATA,
     ISDICT_INVALID_MEHTOD_SWAGGER_DATA,
     ISDICT_INVALID_SWAGGER_DATA,
 )
-from tests.unit_tests.mock_data.schema_md.phase_1_swagger_data_md.valid_swagger import (  # noqa: E501
+from tests.mock_data.schema_md.phase_1_swagger_data_md.valid_swagger import (  # noqa: E501
     VALID_SWAGGER_DATA,
 )
-from tests.unit_tests.mock_data.schema_md.phase_2_schema_md.extract_request_schema import (  # noqa: E501
+from tests.mock_data.schema_md.phase_2_schema_md.extract_request_schema import (  # noqa: E501
     REQUEST_SCHEMA_DETAILS_DATA,
     REQUEST_SCHEMA_NONE_DETAILS_DATA,
     SCHEMA_WITH_PROPERTIES,
     SCHEMA_WITH_TYPE,
 )
-from tests.unit_tests.mock_data.schema_md.phase_2_schema_md.extract_responce_schema import (  # noqa: E501
+from tests.mock_data.schema_md.phase_2_schema_md.extract_responce_schema import (  # noqa: E501
     RESPONSE_DETAILS,
     RESPONSE_NOT200_DETAILS,
     RESPONSE_NOT_DICT_DETAILS,
 )
-from tests.unit_tests.mock_data.schema_md.phase_2_schema_md.process_schema import (  # noqa: E501
+from tests.mock_data.schema_md.phase_2_schema_md.process_schema import (  # noqa: E501
     PROCESS_EMPTY_SCHEMA,
     PROCESS_EXPECTED_METADATA,
     PROCESS_EXPECTED_NESTED,
     PROCESS_SCHEMA,
 )
-from tests.unit_tests.mock_data.schema_md.phase_2_schema_md.properties_metadata import (  # noqa: E501
+from tests.mock_data.schema_md.phase_2_schema_md.properties_metadata import (  # noqa: E501
     NESTED_REFERENCE_SCHEMA,
     PROPERTIES_METADATA,
     PROPERTIES_METADATA_NONE_FIELD,
@@ -43,7 +43,7 @@ from tests.unit_tests.mock_data.schema_md.phase_2_schema_md.properties_metadata 
     PROPERTIES_METADATA_WITHOUT_REQUIRED,
     SWAGGER_WITH_CATEGORY_DEFINITION,
 )
-from tests.unit_tests.mock_data.schema_md.phase_2_schema_md.resolution_schema import (  # noqa: E501
+from tests.mock_data.schema_md.phase_2_schema_md.resolution_schema import (  # noqa: E501
     ARRAY_SCHEMA_WITH_ITEM_REF,
     EXPECTED_ALLOF_SCHEMA,
     EXPECTED_ALLOF_WITH_EMPTY_PART,

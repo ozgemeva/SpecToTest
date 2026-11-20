@@ -3,10 +3,10 @@ from types import SimpleNamespace
 import pytest
 
 from app.ai.llm_client import LlmClient
-from tests.unit_tests.mock_data.llm_md.llm_request_md import (
+from tests.mock_data.llm_md.llm_request_md import (
     LLM_REQUEST,
 )
-from tests.unit_tests.mock_data.llm_md.llm_response_md import (
+from tests.mock_data.llm_md.llm_response_md import (
     INVALID_LLM_RESPONSE,
     LLM_RESPONSE,
     LLM_RESPONSE_LIST,
@@ -14,7 +14,7 @@ from tests.unit_tests.mock_data.llm_md.llm_response_md import (
     LLM_RESPONSE_WITH_NODICT_NOLIST,
     TEMP_PROMPT,
 )
-from tests.unit_tests.mock_data.llm_md.swagger_endpoint_md import MOCK_ENDPOINT
+from tests.mock_data.llm_md.swagger_endpoint_md import MOCK_ENDPOINT
 
 
 # cteate fake client for OpenAI

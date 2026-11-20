@@ -1,12 +1,15 @@
 from app.ai.test_planner import BuildTestPlan
 from app.api_parser.swagger_parser import SwaggerParser
 from app.schema.schema_processor import SchemaProcessor
-
+from app.ai.response_parser import ResponseParser
+from SpecToTest.tests.mock_data.llm_md.llm_response_md import LLM_RESPONSE
+from app.ai.llm_client import LlmClient
 
 def main():
     parser = SwaggerParser()
     processor = SchemaProcessor()
     ai_test_prompt = BuildTestPlan()
+    response_parser = ResponseParser()
 
     swagger_data = parser.fetch_swagger()
     endpoints = parser.parse_paths()
@@ -40,6 +43,15 @@ def main():
             request_result,
             response_result,
         )
+        
+        import json  # Dosyanın en üstüne ekle
+
+        mock_llm_output = json.dumps(LLM_RESPONSE)
+        parsed_response = response_parser.parse_response(mock_llm_output)
+
+        response_parser.validate_scenarios(parsed_response, endpoint)
+        print("MOCK LLM RESPONSE VALIDATED SUCCESSFULLY")
+        print(json.dumps(parsed_response, indent=4))        
 
         # Print the complete prompt to verify the data
         # before sending it to the LLM.
@@ -50,7 +62,8 @@ def main():
             # TEMPORARY: Process only the first endpoint
             # while testing the initial LLM integration.
             break
-
+        
+        
 
 if __name__ == "__main__":
     main()
